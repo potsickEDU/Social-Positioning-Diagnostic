@@ -294,113 +294,196 @@
     </div>
   </section>
 
-  <script>
-    // Define the questions and which index each measures (5 per index)
-    const indices = [
-      { name: "Entry Speed Index (ESI)", short: "ESI", desc: "How quickly and fluidly the teen initiates social connections and enters group situations." },
-      { name: "Friction Control Index (FCI)", short: "FCI", desc: "How effectively the teen minimizes awkwardness, recovers from missteps, and harmonizes with group norms." },
-      { name: "Authority Signal Index (ASI)", short: "ASI", desc: "How strongly the teen projects confidence, credibility, and social leadership." },
-      { name: "Selection Readiness Index (SRI)", short: "SRI", desc: "How ready the teen is to be chosen by peers for collaboration, leadership, or friendship opportunities." },
-    ];
+<script>
+  // --- Data ---
+  const indices = [
+    { name: "Entry Speed Index (ESI)", short: "ESI", desc: "How quickly and fluidly the teen initiates social connections and enters group situations." },
+    { name: "Friction Control Index (FCI)", short: "FCI", desc: "How effectively the teen minimizes awkwardness, recovers from missteps, and harmonizes with group norms." },
+    { name: "Authority Signal Index (ASI)", short: "ASI", desc: "How strongly the teen projects confidence, credibility, and social leadership." },
+    { name: "Selection Readiness Index (SRI)", short: "SRI", desc: "How ready the teen is to be chosen by peers for collaboration, leadership, or friendship opportunities." },
+  ];
 
-    const questions = [
-      // ESI
-      "I feel at ease joining new group conversations.",
-      "I greet others promptly when I enter a room.",
-      "I know how to introduce myself in unfamiliar social settings.",
-      "I rarely hesitate to approach peers I don’t know.",
-      "Starting conversations comes naturally to me.",
-      // FCI
-      "If a conversation gets awkward, I can get it back on track.",
-      "I quickly notice when someone in a group feels uncomfortable.",
-      "I adapt well if social plans or activities change suddenly.",
-      "I can gracefully end conversations that lose energy.",
-      "I notice and correct my social missteps without worry.",
-      // ASI
-      "Others look to me for direction or feedback in group situations.",
-      "My voice and posture project confidence.",
-      "I’m comfortable taking the lead in group tasks.",
-      "Others describe me as assertive but approachable.",
-      "Peers notice when I contribute ideas or suggestions.",
-      // SRI
-      "Friends often invite me to new clubs or teams.",
-      "I’m asked to take on responsibility by peers or adults.",
-      "People often want to partner with me in activities.",
-      "I find it easy to build trust with new acquaintances.",
-      "I’m often chosen to represent my group or class."
-    ];
+  const questionsByIndex = [
+    {
+      indexShort: "ESI",
+      title: "Entry Speed",
+      blurb: "How fast your teen initiates and steps into social moments.",
+      questions: [
+        "I feel at ease joining new group conversations.",
+        "I greet others promptly when I enter a room.",
+        "I know how to introduce myself in unfamiliar social settings.",
+        "I rarely hesitate to approach peers I don’t know.",
+        "Starting conversations comes naturally to me.",
+      ],
+    },
+    {
+      indexShort: "FCI",
+      title: "Friction Control",
+      blurb: "How well your teen handles awkwardness, pressure, and social bumps.",
+      questions: [
+        "If a conversation gets awkward, I can get it back on track.",
+        "I quickly notice when someone in a group feels uncomfortable.",
+        "I adapt well if social plans or activities change suddenly.",
+        "I can gracefully end conversations that lose energy.",
+        "I notice and correct my social missteps without worry.",
+      ],
+    },
+    {
+      indexShort: "ASI",
+      title: "Authority Signals",
+      blurb: "How strongly your teen signals leadership, presence, and credibility.",
+      questions: [
+        "Others look to me for direction or feedback in group situations.",
+        "My voice and posture project confidence.",
+        "I’m comfortable taking the lead in group tasks.",
+        "Others describe me as assertive but approachable.",
+        "Peers notice when I contribute ideas or suggestions.",
+      ],
+    },
+    {
+      indexShort: "SRI",
+      title: "Selection Readiness",
+      blurb: "How likely peers are to choose your teen for teams, roles, and invites.",
+      questions: [
+        "Friends often invite me to new clubs or teams.",
+        "I’m asked to take on responsibility by peers or adults.",
+        "People often want to partner with me in activities.",
+        "I find it easy to build trust with new acquaintances.",
+        "I’m often chosen to represent my group or class.",
+      ],
+    },
+  ];
 
-    // Each set of 5 questions maps to the indices in order
-    function getIndexForQuestion(i) {
-      return Math.floor(i/5); // 0..3 -> index in indices[]
-    }
+  const choices = ["Never", "Rarely", "Sometimes", "Often", "Always"];
 
-    // Build form questions with 5-point radio scales
-    function buildQuestions() {
-      let list = '';
-      for (let i = 0; i < questions.length; ++i) {
-        const ind = indices[getIndexForQuestion(i)];
-        const qNum = i+1;
-        list += `<div class="question-block">
-          <label class="question-label" for="q${qNum}"><span style="color:#fff6b0;font-weight:800;">Q${qNum}:</span> ${questions[i]}</label>
-          <div class="answers">`;
-        for (let val = 1; val <=5; ++val) {
-          const choiceText = ["Never", "Rarely", "Sometimes", "Often", "Always"][val-1];
-          list += `
-            <label>
-              <input type="radio" name="q${qNum}" value="${val}" required style="display:none;">
-              <span>${choiceText}</span>
+  // --- Helpers ---
+  function $(id) {
+    return document.getElementById(id);
+  }
+
+  function scoreToLabel(percent) {
+    if (percent >= 90) return { color: "#82ff7c", label: "Elite social execution signal." };
+    if (percent >= 70) return { color: "#29f7ff", label: "Strong signal — above baseline." };
+    if (percent >= 40) return { color: "#ffa63c", label: "Developing — training leverage available." };
+    return { color: "#fa5959", label: "Suppressed execution — primary constraint zone." };
+  }
+
+  // --- Build Questions (with sections) ---
+  function buildQuestions() {
+    const container = $("question-list");
+    if (!container) return;
+
+    let html = "";
+    let qNum = 1;
+
+    questionsByIndex.forEach((block) => {
+      html += `
+        <div class="section-divider">
+          <h3>${block.title}</h3>
+          <p>${block.blurb}</p>
+        </div>
+      `;
+
+      block.questions.forEach((q) => {
+        html += `
+          <div class="question-block">
+            <label class="question-label" for="q${qNum}">
+              <span style="color:#fff6b0;font-weight:800;">Q${qNum}:</span> ${q}
             </label>
+            <div class="answers">
+        `;
+
+        for (let val = 1; val <= 5; val++) {
+          const text = choices[val - 1];
+          html += `
+              <label>
+                <input type="radio" name="q${qNum}" value="${val}" required>
+                <span>${text}</span>
+              </label>
           `;
         }
-        list += `</div></div>`;
-      }
-      document.getElementById('question-list').innerHTML = list;
-    }
 
-    buildQuestions();
+        html += `
+            </div>
+          </div>
+        `;
 
-    // Scoring and UI logic
-    document.getElementById('diagnostic-form').addEventListener('submit', function(e) {
-      e.preventDefault();
-      const form = e.target;
-      let sectionScores = [0,0,0,0];
-      let sectionCounts = [0,0,0,0]; // In case we want partial progress
-      for (let i = 0; i < questions.length; ++i) {
-        const val = Number(form[`q${i+1}`].value || 0);
-        const sidx = getIndexForQuestion(i);
-        sectionScores[sidx] += val;
-        sectionCounts[sidx]++;
-      }
-      // Calculate percent scores (max per section: 5 questions * 5 = 25)
-      const percentScores = sectionScores.map((sum) => Math.round(100*sum/25));
-      // Show results section
-      document.getElementById('diagnostic-section').style.display = 'none';
-      document.getElementById('results-section').style.display = 'flex';
-      // Update bars & scores
-      ["esi","fci","asi","sri"].forEach((key, idx) => {
-        document.getElementById(`${key}-bar`).style.width = percentScores[idx]+"%";
-        document.getElementById(`${key}-score`).innerText = percentScores[idx] + "/100";
+        qNum++;
       });
-      // Show explanations
-      document.getElementById('explanation').innerHTML = indices.map((ind, idx) => {
-        let color = "#d9f2ff";
-        let range = "";
-        if (percentScores[idx]>=90)      { color= "#82ff7c"; range="Elite social performance."; }
-        else if (percentScores[idx]>=70){ color= "#29f7ff"; range="Strong skills.";}
-        else if (percentScores[idx]>=40){ color= "#ffa63c"; range="Developing skillset, improvement needed.";}
-        else                            { color= "#fa5959"; range="Significant growth needed."; }
-        return `<strong style="color:var(--electric-blue);">${ind.name}:</strong> <span style="color:${color};font-weight:bold;">${percentScores[idx]}/100</span><br>
-        <span style="color:${color}">${range}</span> <br>
-        <span style="color:#b7faff">${ind.desc}</span>
-        <hr style="border:0;border-top:1px solid #34e6ff25;"></hr>`;
-      }).join("");
-
     });
 
-    // CTA button links (replace '#' with your links if desired)
-    document.getElementById('apply-btn').href = "https://your-confidence-lab-application-link.com";
-    document.getElementById('book-btn').href = "https://your-screening-booking-link.com";
-  </script>
+    container.innerHTML = html;
+  }
+
+  // --- Init safely after DOM is ready ---
+  document.addEventListener("DOMContentLoaded", () => {
+    buildQuestions();
+
+    const form = $("diagnostic-form");
+    if (!form) return;
+
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+
+      // Collect answers
+      const totals = [0, 0, 0, 0];
+
+      // 20 questions total, 5 per index
+      for (let i = 1; i <= 20; i++) {
+        const picked = form.querySelector(`input[name="q${i}"]:checked`);
+        const val = picked ? Number(picked.value) : 0;
+
+        const idx = Math.floor((i - 1) / 5); // 0..3
+        totals[idx] += val;
+      }
+
+      // Convert to percent (max per index = 25)
+      const percents = totals.map((sum) => Math.round((sum / 25) * 100));
+
+      // Hide form / show results
+      const diag = $("diagnostic-section");
+      const results = $("results-section");
+      if (diag) diag.style.display = "none";
+      if (results) results.style.display = "flex";
+
+      // Bars + scores
+      const keys = ["esi", "fci", "asi", "sri"];
+      keys.forEach((key, idx) => {
+        const bar = $(`${key}-bar`);
+        const score = $(`${key}-score`);
+        if (bar) bar.style.width = percents[idx] + "%";
+        if (score) score.textContent = percents[idx] + "/100";
+      });
+
+      // Explanations
+      const expl = $("explanation");
+      if (expl) {
+        expl.innerHTML = indices
+          .map((ind, idx) => {
+            const s = scoreToLabel(percents[idx]);
+            return `
+              <div style="margin-bottom:14px;">
+                <strong style="color:var(--electric-blue);">${ind.name}:</strong>
+                <span style="color:${s.color};font-weight:800;"> ${percents[idx]}/100</span><br>
+                <span style="color:${s.color};">${s.label}</span><br>
+                <span style="color:#b7faff;">${ind.desc}</span>
+              </div>
+              <hr style="border:0;border-top:1px solid #34e6ff25;">
+            `;
+          })
+          .join("");
+      }
+
+      // CTA links (swap these)
+      const applyBtn = $("apply-btn");
+      const bookBtn = $("book-btn");
+      if (applyBtn) applyBtn.href = "https://your-confidence-lab-application-link.com";
+      if (bookBtn) bookBtn.href = "https://your-screening-booking-link.com";
+
+      // Scroll to results (nice UX)
+      if (results) results.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  });
+</script>
 </body>
 </html>
