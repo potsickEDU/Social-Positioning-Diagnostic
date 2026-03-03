@@ -1,17 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Social Positioning Diagnostic™</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <style>
     :root {
       --bg-black: #0c0c1c;
       --bg-navy: #11112A;
       --electric-blue: #29f7ff;
-      --white: #fff;
+      --white: #ffffff;
       --hud-green: #82ff7c;
+      --warn: #ffa63c;
+      --danger: #fa5959;
     }
+
     body {
       margin: 0;
       padding: 0;
@@ -19,471 +23,514 @@
       color: var(--white);
       font-family: 'Montserrat', 'Roboto', 'Arial', sans-serif;
       min-height: 100vh;
-      letter-spacing: 0.05em;
+      letter-spacing: 0.02em;
       display: flex;
       flex-direction: column;
       align-items: center;
     }
+
     header {
       width: 100%;
-      max-width: 700px;
+      max-width: 760px;
       text-align: left;
-      margin: 48px 0 24px 0;
+      margin: 48px 16px 24px 16px;
     }
+
     .title {
       font-size: 2.6rem;
-      font-weight: 700;
+      font-weight: 800;
       color: var(--electric-blue);
       text-shadow: 0 0 12px #29f7ff60;
       margin-bottom: 0.5em;
+      letter-spacing: 0.03em;
     }
+
     .subtitle {
-      font-size: 1.15rem;
+      font-size: 1.1rem;
       font-weight: 500;
       color: #b5f7ff;
       line-height: 1.6;
       margin-bottom: 0.75em;
     }
+
     .diagnostic-section {
       background: #171730a0;
       border: 1.5px solid var(--electric-blue);
-      border-radius: 10px;
+      border-radius: 12px;
       box-shadow: 0 2px 28px #04093a80;
-      padding: 2rem 1rem;
-      max-width: 720px;
-      width: 100%;
-      margin-bottom: 2.5rem;
+      padding: 28px 18px;
+      max-width: 760px;
+      width: calc(100% - 32px);
+      margin: 0 16px 40px 16px;
       display: flex;
       flex-direction: column;
       align-items: center;
       position: relative;
       z-index: 2;
     }
+
     .hud-grid {
       position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
+      inset: 0;
       pointer-events: none;
-      opacity: 0.20;
+      opacity: 0.18;
       z-index: 1;
-      background: 
+      background:
         repeating-linear-gradient(to right, transparent 0px 19px, #0ff2 20px 20px),
         repeating-linear-gradient(to bottom, transparent 0px 19px, #0ff2 20px 20px);
-      border-radius: 10px;
+      border-radius: 12px;
     }
+
     form {
       z-index: 2;
       width: 100%;
-      max-width: 600px;
+      max-width: 660px;
     }
+
+    .section-divider {
+      margin: 26px 0 14px 0;
+      padding: 14px 14px;
+      border: 1px solid #29f7ff66;
+      border-radius: 12px;
+      background: #0b1024a8;
+      box-shadow: 0 1px 14px #09297355;
+      width: 100%;
+    }
+
+    .section-divider h3 {
+      margin: 0 0 6px 0;
+      color: var(--electric-blue);
+      font-size: 1.08rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      font-weight: 800;
+    }
+
+    .section-divider p {
+      margin: 0;
+      color: #b7faff;
+      font-size: 0.98rem;
+      line-height: 1.45;
+    }
+
     .question-block {
-      margin-bottom: 1.25em;
+      margin: 14px 0;
       display: flex;
       flex-direction: column;
+      width: 100%;
     }
+
     .question-label {
-      font-size: 1.06em;
-      margin-bottom: 0.45em;
+      font-size: 1.02rem;
+      margin-bottom: 10px;
       color: var(--electric-blue);
       letter-spacing: 0.02em;
+      line-height: 1.35;
     }
+
     .answers {
       display: flex;
-      justify-content: flex-start;
-      gap: 0.7em;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
     }
+
     .answers label {
-      font-size: 0.95em;
-      padding: 6px 12px;
-      background: #10142d;
-      border-radius: 6px;
-      border: 1px solid #1e2d47;
+      position: relative;
+      display: inline-flex;
+      align-items: center;
       cursor: pointer;
-      color: var(--white);
-      transition: background 0.2s, border 0.2s;
+      user-select: none;
     }
-    .answers input[type=radio]:checked + span {
+
+    /* hide radio but keep it accessible */
+    .answers input[type="radio"] {
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .answers span {
+      font-size: 0.95rem;
+      padding: 9px 12px;
+      background: #10142d;
+      border-radius: 8px;
+      border: 1px solid #1e2d47;
+      color: var(--white);
+      transition: transform 0.12s ease, background 0.18s ease, border 0.18s ease, color 0.18s ease;
+      box-shadow: 0 1px 10px #00000040;
+    }
+
+    .answers input[type="radio"]:focus + span {
+      outline: 2px solid #29f7ff66;
+      outline-offset: 2px;
+    }
+
+    .answers input[type="radio"]:checked + span {
       background: var(--electric-blue);
       color: #0c101e;
-      font-weight: 700;
+      font-weight: 800;
       border-color: var(--electric-blue);
+      transform: translateY(-1px);
     }
+
     .submit-btn {
-      margin: 2em auto 0 auto;
+      margin: 26px auto 0 auto;
       display: block;
-      padding: 18px 42px;
-      font-size: 1.3em;
+      padding: 16px 40px;
+      font-size: 1.15rem;
       font-family: inherit;
       background: var(--electric-blue);
       color: #191f36;
       box-shadow: 0 2px 16px #0ff1;
       border: none;
-      border-radius: 10px;
-      font-weight: 700;
+      border-radius: 12px;
+      font-weight: 900;
       letter-spacing: 0.06em;
       cursor: pointer;
-      transition: background 0.22s cubic-bezier(.4,0,.2,1);
+      transition: background 0.18s ease, transform 0.12s ease;
       outline: none;
     }
-    .submit-btn:hover, .cta-btn:hover {
+
+    .submit-btn:hover {
       background: #50ffe3;
+      transform: translateY(-1px);
     }
+
     .results-section {
       background: #141827d9;
       border: 1.5px solid var(--electric-blue);
-      border-radius: 10px;
+      border-radius: 12px;
       box-shadow: 0 1px 14px #09297380;
-      padding: 2.5rem 1.2rem 2rem 1.2rem;
-      max-width: 720px;
-      width: 100%;
-      margin-top: -1.2rem;
+      padding: 28px 18px;
+      max-width: 760px;
+      width: calc(100% - 32px);
+      margin: 0 16px 50px 16px;
       z-index: 3;
-      display: flex;
+      display: none;
       flex-direction: column;
       align-items: center;
       position: relative;
     }
+
     .hud-meter {
       width: 96%;
-      display: flex;
-      justify-content: space-between;
-      margin: 1.5em 0 0.6em 0;
+      display: grid;
+      grid-template-columns: 210px 1fr 70px;
+      gap: 12px;
+      align-items: center;
+      margin: 16px 0 6px 0;
     }
+
     .meter-label {
       color: var(--electric-blue);
-      font-size: 1em;
-      font-weight: 700;
-      flex: 1;
+      font-size: 0.98rem;
+      font-weight: 800;
     }
+
     .score-bar-bg {
-      width: 85%;
+      width: 100%;
       height: 12px;
       background: #242857;
-      border-radius: 5px;
+      border-radius: 6px;
       overflow: hidden;
-      margin-left: 1em;
       border: 1px solid #3070a7;
       box-shadow: 0 1px 8px #29f7ff44;
     }
+
     .score-bar-inner {
       height: 100%;
-      border-radius: 4px;
+      width: 0%;
+      border-radius: 6px;
       background: linear-gradient(90deg, var(--electric-blue), #69ffd8);
       box-shadow: 0 0 10px #35b3ff80;
+      transition: width 0.35s ease;
     }
+
     .score-explanation {
-      margin-top: 22px;
-      margin-bottom: 10px;
+      margin-top: 18px;
       width: 95%;
-      font-size: 1.07em;
+      font-size: 1.03rem;
       color: #b7faff;
       line-height: 1.5;
       background: #09203e2d;
-      padding: 10px 16px;
-      border-radius: 7px;
+      padding: 12px 14px;
+      border-radius: 10px;
+      border: 1px solid #29f7ff22;
     }
+
     .cta-buttons {
       display: flex;
       justify-content: center;
-      gap: 2em;
-      margin-top: 2em;
-      width: 90%;
+      gap: 14px;
+      margin-top: 18px;
+      width: 95%;
+      flex-wrap: wrap;
     }
+
     .cta-btn {
-      padding: 18px 36px;
-      font-size: 1.13em;
+      padding: 14px 20px;
+      font-size: 1.02rem;
       background: var(--electric-blue);
       color: #191f36;
       border: none;
-      border-radius: 8px;
+      border-radius: 10px;
       font-family: inherit;
-      font-weight: 700;
-      letter-spacing: 0.08em;
+      font-weight: 900;
+      letter-spacing: 0.06em;
       box-shadow: 0 1px 12px #0ff2;
       cursor: pointer;
-      transition: background 0.22s cubic-bezier(.4,0,.2,1);
+      transition: background 0.18s ease, transform 0.12s ease;
       text-decoration: none;
       display: inline-block;
+      text-align: center;
+      min-width: 220px;
     }
-    @media (max-width: 700px) {
-      .diagnostic-section, .results-section, header { max-width: 98vw; }
-      .results-section { padding: 15vw 4vw; }
-      .cta-buttons { flex-direction: column; gap: 1.2em; align-items: center;}
+
+    .cta-btn:hover {
+      background: #50ffe3;
+      transform: translateY(-1px);
     }
-  <style>
-  /* existing CSS above stays */
 
-  .section-divider {
-    margin: 2.2rem 0 1.2rem 0;
-    padding: 0.9rem 1rem;
-    border: 1px solid #29f7ff66;
-    border-radius: 10px;
-    background: #0b1024a8;
-    box-shadow: 0 1px 14px #09297355;
-    width: 100%;
-  }
-
-  .section-divider h3 {
-    margin: 0 0 0.35rem 0;
-    color: var(--electric-blue);
-    font-size: 1.15rem;
-    letter-spacing: 0.05em;
-  }
-
-  .section-divider p {
-    margin: 0;
-    color: #b7faff;
-    font-size: 0.98rem;
-    line-height: 1.45;
-  }
-
-  .answers input[type="radio"] {
-    position: absolute;
-    opacity: 0;
-  }
-</style>
+    @media (max-width: 720px) {
+      header { margin: 36px 14px 18px 14px; }
+      .title { font-size: 2.15rem; }
+      .hud-meter {
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
+    }
+  </style>
 </head>
+
 <body>
   <header>
     <div class="title">Social Positioning Diagnostic™</div>
     <div class="subtitle">
-      A 20-question assessment measuring your teen’s social execution across four core areas:<br>
+      A 20-question assessment measuring your teen’s social execution across four core areas:<br />
       <b>Entry Speed</b>, <b>Friction Control</b>, <b>Authority Signals</b>, and <b>Selection Readiness</b>.
     </div>
   </header>
 
   <section class="diagnostic-section" id="diagnostic-section">
     <div class="hud-grid"></div>
+
     <form id="diagnostic-form" autocomplete="off">
-      <!-- 20 Questions: 5 for each Index -->
       <div id="question-list"></div>
       <button class="submit-btn" type="submit">Get My Diagnostic</button>
     </form>
   </section>
 
-  <section id="results-section" class="results-section" .answers input[type="radio"] {
-  position: absolute;
-  opacity: 0;
-};">
-    <h2 style="color:var(--electric-blue);font-size:2rem;">Your Results</h2>
+  <section id="results-section" class="results-section">
+    <h2 style="color:var(--electric-blue);font-size:2rem;margin:0 0 10px 0;">Your Results</h2>
+
     <div class="hud-meter">
       <span class="meter-label">Entry Speed Index (ESI)</span>
       <span class="score-bar-bg"><span class="score-bar-inner" id="esi-bar"></span></span>
-      <span id="esi-score"></span>
+      <span id="esi-score" style="font-weight:900;color:#d9f2ff;">0/100</span>
     </div>
+
     <div class="hud-meter">
       <span class="meter-label">Friction Control Index (FCI)</span>
       <span class="score-bar-bg"><span class="score-bar-inner" id="fci-bar"></span></span>
-      <span id="fci-score"></span>
+      <span id="fci-score" style="font-weight:900;color:#d9f2ff;">0/100</span>
     </div>
+
     <div class="hud-meter">
       <span class="meter-label">Authority Signal Index (ASI)</span>
       <span class="score-bar-bg"><span class="score-bar-inner" id="asi-bar"></span></span>
-      <span id="asi-score"></span>
+      <span id="asi-score" style="font-weight:900;color:#d9f2ff;">0/100</span>
     </div>
+
     <div class="hud-meter">
       <span class="meter-label">Selection Readiness Index (SRI)</span>
       <span class="score-bar-bg"><span class="score-bar-inner" id="sri-bar"></span></span>
-      <span id="sri-score"></span>
+      <span id="sri-score" style="font-weight:900;color:#d9f2ff;">0/100</span>
     </div>
-    <div class="score-explanation" id="explanation">
-      <!-- Explanations will appear here -->
-    </div>
+
+    <div class="score-explanation" id="explanation"></div>
+
     <div class="cta-buttons">
       <a href="#" class="cta-btn" id="apply-btn">Apply for Confidence Lab™</a>
       <a href="#" class="cta-btn" id="book-btn">Book a Screening Call</a>
     </div>
   </section>
 
-<script>
-  // --- Data ---
-  const indices = [
-    { name: "Entry Speed Index (ESI)", short: "ESI", desc: "How quickly and fluidly the teen initiates social connections and enters group situations." },
-    { name: "Friction Control Index (FCI)", short: "FCI", desc: "How effectively the teen minimizes awkwardness, recovers from missteps, and harmonizes with group norms." },
-    { name: "Authority Signal Index (ASI)", short: "ASI", desc: "How strongly the teen projects confidence, credibility, and social leadership." },
-    { name: "Selection Readiness Index (SRI)", short: "SRI", desc: "How ready the teen is to be chosen by peers for collaboration, leadership, or friendship opportunities." },
-  ];
+  <script>
+    // --- Data (grouped into 4 blocks / 5 questions each) ---
+    const indices = [
+      { name: "Entry Speed Index (ESI)", short: "ESI", desc: "How quickly and fluidly the teen initiates social connections and enters group situations." },
+      { name: "Friction Control Index (FCI)", short: "FCI", desc: "How effectively the teen minimizes awkwardness, recovers from missteps, and harmonizes with group norms." },
+      { name: "Authority Signal Index (ASI)", short: "ASI", desc: "How strongly the teen projects confidence, credibility, and social leadership." },
+      { name: "Selection Readiness Index (SRI)", short: "SRI", desc: "How ready the teen is to be chosen by peers for collaboration, leadership, or friendship opportunities." },
+    ];
 
-  const questionsByIndex = [
-    {
-      indexShort: "ESI",
-      title: "Entry Speed",
-      blurb: "How fast your teen initiates and steps into social moments.",
-      questions: [
-        "I feel at ease joining new group conversations.",
-        "I greet others promptly when I enter a room.",
-        "I know how to introduce myself in unfamiliar social settings.",
-        "I rarely hesitate to approach peers I don’t know.",
-        "Starting conversations comes naturally to me.",
-      ],
-    },
-    {
-      indexShort: "FCI",
-      title: "Friction Control",
-      blurb: "How well your teen handles awkwardness, pressure, and social bumps.",
-      questions: [
-        "If a conversation gets awkward, I can get it back on track.",
-        "I quickly notice when someone in a group feels uncomfortable.",
-        "I adapt well if social plans or activities change suddenly.",
-        "I can gracefully end conversations that lose energy.",
-        "I notice and correct my social missteps without worry.",
-      ],
-    },
-    {
-      indexShort: "ASI",
-      title: "Authority Signals",
-      blurb: "How strongly your teen signals leadership, presence, and credibility.",
-      questions: [
-        "Others look to me for direction or feedback in group situations.",
-        "My voice and posture project confidence.",
-        "I’m comfortable taking the lead in group tasks.",
-        "Others describe me as assertive but approachable.",
-        "Peers notice when I contribute ideas or suggestions.",
-      ],
-    },
-    {
-      indexShort: "SRI",
-      title: "Selection Readiness",
-      blurb: "How likely peers are to choose your teen for teams, roles, and invites.",
-      questions: [
-        "Friends often invite me to new clubs or teams.",
-        "I’m asked to take on responsibility by peers or adults.",
-        "People often want to partner with me in activities.",
-        "I find it easy to build trust with new acquaintances.",
-        "I’m often chosen to represent my group or class.",
-      ],
-    },
-  ];
+    const questionsByIndex = [
+      {
+        indexShort: "ESI",
+        title: "Entry Speed",
+        blurb: "How fast your teen initiates and steps into social moments.",
+        questions: [
+          "I feel at ease joining new group conversations.",
+          "I greet others promptly when I enter a room.",
+          "I know how to introduce myself in unfamiliar social settings.",
+          "I rarely hesitate to approach peers I don’t know.",
+          "Starting conversations comes naturally to me.",
+        ],
+      },
+      {
+        indexShort: "FCI",
+        title: "Friction Control",
+        blurb: "How well your teen handles awkwardness, pressure, and social bumps.",
+        questions: [
+          "If a conversation gets awkward, I can get it back on track.",
+          "I quickly notice when someone in a group feels uncomfortable.",
+          "I adapt well if social plans or activities change suddenly.",
+          "I can gracefully end conversations that lose energy.",
+          "I notice and correct my social missteps without worry.",
+        ],
+      },
+      {
+        indexShort: "ASI",
+        title: "Authority Signals",
+        blurb: "How strongly your teen signals leadership, presence, and credibility.",
+        questions: [
+          "Others look to me for direction or feedback in group situations.",
+          "My voice and posture project confidence.",
+          "I’m comfortable taking the lead in group tasks.",
+          "Others describe me as assertive but approachable.",
+          "Peers notice when I contribute ideas or suggestions.",
+        ],
+      },
+      {
+        indexShort: "SRI",
+        title: "Selection Readiness",
+        blurb: "How likely peers are to choose your teen for teams, roles, and invites.",
+        questions: [
+          "Friends often invite me to new clubs or teams.",
+          "I’m asked to take on responsibility by peers or adults.",
+          "People often want to partner with me in activities.",
+          "I find it easy to build trust with new acquaintances.",
+          "I’m often chosen to represent my group or class.",
+        ],
+      },
+    ];
 
-  const choices = ["Never", "Rarely", "Sometimes", "Often", "Always"];
+    const choices = ["Never", "Rarely", "Sometimes", "Often", "Always"];
 
-  // --- Helpers ---
-  function $(id) {
-    return document.getElementById(id);
-  }
+    // --- Helpers ---
+    function $(id) { return document.getElementById(id); }
 
-  function scoreToLabel(percent) {
-    if (percent >= 90) return { color: "#82ff7c", label: "Elite social execution signal." };
-    if (percent >= 70) return { color: "#29f7ff", label: "Strong signal — above baseline." };
-    if (percent >= 40) return { color: "#ffa63c", label: "Developing — training leverage available." };
-    return { color: "#fa5959", label: "Suppressed execution — primary constraint zone." };
-  }
+    function scoreToLabel(percent) {
+      if (percent >= 90) return { color: "#82ff7c", label: "Elite social execution signal." };
+      if (percent >= 70) return { color: "#29f7ff", label: "Strong signal — above baseline." };
+      if (percent >= 40) return { color: "#ffa63c", label: "Developing — training leverage available." };
+      return { color: "#fa5959", label: "Suppressed execution — primary constraint zone." };
+    }
 
-  // --- Build Questions (with sections) ---
-  function buildQuestions() {
-    const container = $("question-list");
-    if (!container) return;
+    // --- Build Questions (WITH section dividers) ---
+    function buildQuestions() {
+      const container = $("question-list");
+      if (!container) return;
 
-    let html = "";
-    let qNum = 1;
+      let html = "";
+      let qNum = 1;
 
-    questionsByIndex.forEach((block) => {
-      html += `
-        <div class="section-divider">
-          <h3>${block.title}</h3>
-          <p>${block.blurb}</p>
-        </div>
-      `;
-
-      block.questions.forEach((q) => {
+      questionsByIndex.forEach((block) => {
         html += `
-          <div class="question-block">
-            <label class="question-label" for="q${qNum}">
-              <span style="color:#fff6b0;font-weight:800;">Q${qNum}:</span> ${q}
-            </label>
-            <div class="answers">
-        `;
-
-        for (let val = 1; val <= 5; val++) {
-          const text = choices[val - 1];
-          html += `
-              <label>
-                <input type="radio" name="q${qNum}" value="${val}" required>
-                <span>${text}</span>
-              </label>
-          `;
-        }
-
-        html += `
-            </div>
+          <div class="section-divider">
+            <h3>${block.title}</h3>
+            <p>${block.blurb}</p>
           </div>
         `;
 
-        qNum++;
-      });
-    });
-
-    container.innerHTML = html;
-  }
-
-  // --- Init safely after DOM is ready ---
-  document.addEventListener("DOMContentLoaded", () => {
-    buildQuestions();
-
-    const form = $("diagnostic-form");
-    if (!form) return;
-
-    form.addEventListener("submit", (e) => {
-      e.preventDefault();
-
-      // Collect answers
-      const totals = [0, 0, 0, 0];
-
-      // 20 questions total, 5 per index
-      for (let i = 1; i <= 20; i++) {
-        const picked = form.querySelector(`input[name="q${i}"]:checked`);
-        const val = picked ? Number(picked.value) : 0;
-
-        const idx = Math.floor((i - 1) / 5); // 0..3
-        totals[idx] += val;
-      }
-
-      // Convert to percent (max per index = 25)
-      const percents = totals.map((sum) => Math.round((sum / 25) * 100));
-
-      // Hide form / show results
-      const diag = $("diagnostic-section");
-      const results = $("results-section");
-      if (diag) diag.style.display = "none";
-      if (results) results.style.display = "flex";
-
-      // Bars + scores
-      const keys = ["esi", "fci", "asi", "sri"];
-      keys.forEach((key, idx) => {
-        const bar = $(`${key}-bar`);
-        const score = $(`${key}-score`);
-        if (bar) bar.style.width = percents[idx] + "%";
-        if (score) score.textContent = percents[idx] + "/100";
-      });
-
-      // Explanations
-      const expl = $("explanation");
-      if (expl) {
-        expl.innerHTML = indices
-          .map((ind, idx) => {
-            const s = scoreToLabel(percents[idx]);
-            return `
-              <div style="margin-bottom:14px;">
-                <strong style="color:var(--electric-blue);">${ind.name}:</strong>
-                <span style="color:${s.color};font-weight:800;"> ${percents[idx]}/100</span><br>
-                <span style="color:${s.color};">${s.label}</span><br>
-                <span style="color:#b7faff;">${ind.desc}</span>
+        block.questions.forEach((q) => {
+          html += `
+            <div class="question-block">
+              <div class="question-label">
+                <span style="color:#fff6b0;font-weight:900;">Q${qNum}:</span> ${q}
               </div>
-              <hr style="border:0;border-top:1px solid #34e6ff25;">
+              <div class="answers">
+          `;
+
+          for (let val = 1; val <= 5; val++) {
+            const text = choices[val - 1];
+            html += `
+              <label>
+                <input type="radio" name="q${qNum}" value="${val}" required />
+                <span>${text}</span>
+              </label>
             `;
-          })
-          .join("");
-      }
+          }
 
-      // CTA links (swap these)
-      const applyBtn = $("apply-btn");
-      const bookBtn = $("book-btn");
-      if (applyBtn) applyBtn.href = "https://your-confidence-lab-application-link.com";
-      if (bookBtn) bookBtn.href = "https://your-screening-booking-link.com";
+          html += `
+              </div>
+            </div>
+          `;
 
-      // Scroll to results (nice UX)
-      if (results) results.scrollIntoView({ behavior: "smooth", block: "start" });
+          qNum++;
+        });
+      });
+
+      container.innerHTML = html;
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      buildQuestions();
+
+      const form = $("diagnostic-form");
+      if (!form) return;
+
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        // Collect totals per section (20 total, 5 per index)
+        const totals = [0, 0, 0, 0];
+
+        for (let i = 1; i <= 20; i++) {
+          const picked = form.querySelector(`input[name="q${i}"]:checked`);
+          const val = picked ? Number(picked.value) : 0;
+          const idx = Math.floor((i - 1) / 5); // 0..3
+          totals[idx] += val;
+        }
+
+        // Percent scores (max per index = 25)
+        const percents = totals.map((sum) => Math.round((sum / 25) * 100));
+
+        // Swap views
+        $("diagnostic-section").style.display = "none";
+        const results = $("results-section");
+        results.style.display = "flex";
+
+        // Bars + numbers
+        const keys = ["esi", "fci", "asi", "sri"];
+        keys.forEach((key, idx) => {
+          $(`${key}-bar`).style.width = percents[idx] + "%";
+          $(`${key}-score`).textContent = percents[idx] + "/100";
+        });
+
+        // Explanations
+        const expl = $("explanation");
+        expl.innerHTML = indices.map((ind, idx) => {
+          const s = scoreToLabel(percents[idx]);
+          return `
+            <div style="margin-bottom:14px;">
+              <strong style="color:var(--electric-blue);">${ind.name}:</strong>
+              <span style="color:${s.color};font-weight:900;"> ${percents[idx]}/100</span><br />
+              <span style="color:${s.color};font-weight:800;">${s.label}</span><br />
+              <span style="color:#b7faff;">${ind.desc}</span>
+            </div>
+            <hr style="border:0;border-top:1px solid #34e6ff25;margin:10px 0;">
+          `;
+        }).join("");
+
+        // CTA links (EDIT THESE)
+        $("apply-btn").href = "https://your-confidence-lab-application-link.com";
+        $("book-btn").href  = "https://your-screening-booking-link.com";
+
+        results.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
     });
-  });
-</script>
+  </script>
 </body>
 </html>
