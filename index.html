@@ -598,6 +598,15 @@
       return Math.round((raw / 25) * 100);
     }
 
+function updateSnapshotCard(patternText, constraintText){
+  const p = document.getElementById("snapPattern");
+  const c = document.getElementById("snapConstraint");
+  if (p) p.textContent = patternText || "—";
+  if (c) c.textContent = constraintText || "—";
+}
+
+    updateSnapshotCard(compositePatternLabel, primaryConstraintLabel);
+        
     function pickCompositePattern(rawArr) {
       const [esi, fci, asi, sri] = rawArr;
 
