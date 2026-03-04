@@ -122,17 +122,31 @@
       line-height:1.25;
     }
 
-.diagnostic-status{
-  margin-top:20px;
-  margin-bottom:10px;
-  font-size:20px;
-  color:var(--warn);
-  font-weight:700;
-  text-align:center;
-  line-height:1.5;
-  text-shadow:0 0 6px #ffa63c55;
-}
-    
+    .diagnostic-status{
+      margin-top:20px;
+      margin-bottom:10px;
+      font-size:20px;
+      color:var(--warn);
+      font-weight:700;
+      text-align:center;
+      line-height:1.5;
+      text-shadow:0 0 6px #ffa63c55;
+    }
+
+    /* New: save-to-sheet status line (smaller, calmer) */
+    .save-status{
+      margin-top:14px;
+      font-size:15px;
+      font-weight:800;
+      text-align:center;
+      line-height:1.4;
+      color: rgba(183,250,255,0.88);
+      text-shadow:none;
+    }
+    .save-status.ok{ color: var(--hud-green); }
+    .save-status.warn{ color: var(--warn); }
+    .save-status.fail{ color: var(--danger); }
+
     select, input{
       width:100%;
       padding:10px;
@@ -189,6 +203,25 @@
       background:rgba(0,0,0,0.22);
     }
 
+    /* New: Results header upgrade */
+    .results-top{
+      text-align:center;
+      margin: 2px 0 14px 0;
+    }
+    .results-top .complete{
+      font-size: 1.25rem;
+      font-weight: 900;
+      color: var(--white);
+      letter-spacing: 0.01em;
+      margin: 0 0 6px 0;
+    }
+    .results-top .profile{
+      font-size: 1.10rem;
+      font-weight: 900;
+      color: var(--electric-blue);
+      margin: 0 0 8px 0;
+    }
+
     .results h2{
       text-align:center;
       margin:0 0 6px 0;
@@ -219,6 +252,7 @@
       border-radius:30px;
       overflow:hidden;
       border:1px solid rgba(255,255,255,0.15);
+      position:relative; /* needed for shine */
     }
 
     .bar-fill{
@@ -227,6 +261,26 @@
       border-radius:30px;
       background:var(--electric-blue);
       transition:width 0.5s ease-in-out;
+    }
+
+    /* Tiny pro visual upgrade: subtle shine sweep (no layout change) */
+    .bar-wrap::after{
+      content:"";
+      position:absolute;
+      top:0;
+      left:-60%;
+      width:60%;
+      height:100%;
+      background:linear-gradient(90deg, transparent, rgba(255,255,255,0.22), transparent);
+      transform:skewX(-18deg);
+      animation:barShine 2.8s infinite;
+      pointer-events:none;
+      opacity:0.85;
+    }
+    @keyframes barShine{
+      0%{ left:-60%; }
+      55%{ left:120%; }
+      100%{ left:120%; }
     }
 
     .score-row .val{
@@ -279,81 +333,79 @@
       .card, .question-block, .results, .error-banner{ width:100%; }
     }
 
-/* --- Results CTA spacing control --- */
-.email-instructions{
-  text-align:center;
-  margin-top: 18px;
-  line-height: 1.6;
-}
+    /* --- Results CTA spacing control --- */
+    .email-instructions{
+      text-align:center;
+      margin-top: 18px;
+      line-height: 1.6;
+    }
 
-.step-lines{
-  margin-top: 16px;
-  font-size: 20px;
-  font-weight: 700;
-}
+    .step-lines{
+      margin-top: 16px;
+      font-size: 20px;
+      font-weight: 700;
+    }
 
-.email-line{
-  margin-top: 18px;
-  margin-bottom: 18px;
-}
+    .email-line{
+      margin-top: 18px;
+      margin-bottom: 18px;
+    }
 
-.email-address{
-  font-size: 32px;     /* adjust 30–34 sweet spot */
-  font-weight: 900;
-  color: var(--electric-blue);
-  letter-spacing: .5px;
-}
+    .email-address{
+      font-size: 32px;     /* adjust 30–34 sweet spot */
+      font-weight: 900;
+      color: var(--electric-blue);
+      letter-spacing: .5px;
+    }
 
-.subject-block{
-  margin-top: 6px;
-  margin-bottom: 22px;
-}
+    .subject-block{
+      margin-top: 6px;
+      margin-bottom: 22px;
+    }
 
-.subject-label{
-  font-size: 16px;
-  opacity: .9;
-}
+    .subject-label{
+      font-size: 16px;
+      opacity: .9;
+    }
 
-.subject-text{
-  margin-top: 4px;
-  font-size: 18px;
-}
+    .subject-text{
+      margin-top: 4px;
+      font-size: 18px;
+    }
 
-.email-note{
-  margin-top: 18px;
-  margin-bottom: 26px;  /* pushes “What you’ll receive” down */
-  font-size: 18px;
-  color: var(--muted);
-}
+    .email-note{
+      margin-top: 18px;
+      margin-bottom: 26px;  /* pushes “What you’ll receive” down */
+      font-size: 18px;
+      color: var(--muted);
+    }
 
-.diagnostic-benefit{
-  margin-top: 34px;     /* more breathing room above “What you’ll receive” */
-  font-size: 17px;      /* slightly smaller overall */
-  color: var(--muted);
-}
+    .diagnostic-benefit{
+      margin-top: 34px;     /* more breathing room above “What you’ll receive” */
+      font-size: 17px;      /* slightly smaller overall */
+      color: var(--muted);
+    }
 
-.diagnostic-benefit strong{
-  display:block;
-  margin-bottom: 10px;
-  font-size: 16px;      /* smaller header */
-  color: var(--muted);  /* matches the paragraph color (unified look) */
-  font-weight: 800;
-  letter-spacing: .2px;
-}
+    .diagnostic-benefit strong{
+      display:block;
+      margin-bottom: 10px;
+      font-size: 16px;      /* smaller header */
+      color: var(--muted);  /* matches the paragraph color (unified look) */
+      font-weight: 800;
+      letter-spacing: .2px;
+    }
 
-.benefit-list{
-  font-size: 17px;
-  line-height: 1.7;
-}
+    .benefit-list{
+      font-size: 17px;
+      line-height: 1.7;
+    }
 
-.response-time{
-  margin-top: 18px;
-  font-size: 16px;
-  color: var(--electric-blue);
-  font-weight: 700;
-}
-
-  
+    .response-time{
+      margin-top: 18px;
+      font-size: 16px;
+      color: var(--electric-blue);
+      font-weight: 700;
+    }
   </style>
 </head>
 
@@ -387,6 +439,13 @@
     <form id="diagnosticForm"></form>
 
     <div class="results" id="results">
+
+      <!-- NEW SAFE HEADER UPGRADE -->
+      <div class="results-top">
+        <div class="complete">Diagnostic Complete</div>
+        <div class="profile">Your Teen’s Social Positioning Profile</div>
+      </div>
+
       <h2>Your Results</h2>
       <p class="subtitle">
         This report is designed to produce clarity, not comfort: you’re looking for the <b>constraint</b>.
@@ -394,6 +453,9 @@
       </p>
 
       <div id="scoreBars"></div>
+
+      <!-- NEW: Autosave status -->
+      <div id="saveStatus" class="save-status" style="display:none;"></div>
 
       <div class="card">
         <div class="kicker">Composite Pattern</div>
@@ -417,45 +479,44 @@
 
         <button type="button" onclick="copyResults()">Copy Results</button>
 
-        
-<div class="diagnostic-status">
-⚠️ Your teen's full diagnostic interpretation has not been generated yet.
-</div>
-        
-       <div class="email-instructions">
-  <strong>NEXT STEP (30 seconds)</strong>
+        <div class="diagnostic-status">
+          ⚠️ Your teen's full diagnostic interpretation has not been generated yet.
+        </div>
 
-  <div class="step-lines">
-    <div>1️⃣ Click <b>Copy Results</b></div>
-    <div>2️⃣ Email them to:</div>
-  </div>
+        <div class="email-instructions">
+          <strong>NEXT STEP (30 seconds)</strong>
 
-  <div class="email-line">
-    <span class="email-address">itsapotsickeducation@gmail.com</span>
-  </div>
+          <div class="step-lines">
+            <div>1️⃣ Click <b>Copy Results</b></div>
+            <div>2️⃣ Email them to:</div>
+          </div>
 
-  <div class="subject-block">
-    <div class="subject-label">Subject line:</div>
-    <div class="subject-text"><b>Confidence Lab™ — Diagnostic Results</b></div>
-  </div>
+          <div class="email-line">
+            <span class="email-address">itsapotsickeducation@gmail.com</span>
+          </div>
 
-  <div class="email-note">
-    📩 You'll receive a personalized training recommendation based on your teen’s diagnostic profile.
-  </div>
+          <div class="subject-block">
+            <div class="subject-label">Subject line:</div>
+            <div class="subject-text"><b>Confidence Lab™ — Diagnostic Results</b></div>
+          </div>
 
-  <div class="diagnostic-benefit">
-    <strong>What you'll receive:</strong>
-    <div class="benefit-list">
-      • Your teen’s Social Positioning Profile<br>
-      • The primary constraint affecting confidence execution<br>
-      • The most effective training focus for rapid improvement
-    </div>
-  </div>
+          <div class="email-note">
+            📩 You'll receive a personalized training recommendation based on your teen’s diagnostic profile.
+          </div>
 
-  <div class="response-time">
-    Most parents receive their diagnostic interpretation within 24 hours.
-  </div>
-</div>
+          <div class="diagnostic-benefit">
+            <strong>What you'll receive:</strong>
+            <div class="benefit-list">
+              • Your teen’s Social Positioning Profile<br>
+              • The primary constraint affecting confidence execution<br>
+              • The most effective training focus for rapid improvement
+            </div>
+          </div>
+
+          <div class="response-time">
+            Most parents receive their diagnostic interpretation within 24 hours.
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -465,6 +526,11 @@
     // CONFIG
     // =========================
     const DESTINATION_EMAIL = "itsapotsickeducation@gmail.com";
+
+    // NEW: Google Sheet capture (Apps Script Web App URL)
+    // Paste your deployed Web App URL here when ready:
+    // Example: https://script.google.com/macros/s/XXXXX/exec
+    const SHEET_WEBAPP_URL = "";
 
     // =========================
     // DATA
@@ -551,6 +617,15 @@
       b.style.display = "none";
     }
 
+    function setSaveStatus(text, mode) {
+      const el = $("saveStatus");
+      if (!el) return;
+      el.style.display = "block";
+      el.classList.remove("ok", "warn", "fail");
+      if (mode) el.classList.add(mode);
+      el.textContent = text;
+    }
+
     function zoneFromRaw(raw) {
       if (raw >= 20) return { label: "Strong Signal Zone", color: "var(--hud-green)" };
       if (raw >= 15) return { label: "Developing Signal Zone", color: "var(--electric-blue)" };
@@ -562,7 +637,6 @@
       return Math.round((raw / 25) * 100);
     }
 
-        
     function pickCompositePattern(rawArr) {
       const [esi, fci, asi, sri] = rawArr;
 
@@ -654,11 +728,37 @@
       return plans[short] || [];
     }
 
+    // NEW: Save to Google Sheet (safe / optional)
+    function saveResultsToSheet(payload) {
+      if (!SHEET_WEBAPP_URL) {
+        setSaveStatus("Auto-save is off (no Sheet URL set).", "warn");
+        return;
+      }
+
+      setSaveStatus("Saving results…", "warn");
+
+      fetch(SHEET_WEBAPP_URL, {
+        method: "POST",
+        headers: { "Content-Type": "text/plain;charset=utf-8" },
+        body: JSON.stringify(payload),
+      })
+      .then(res => res.json().catch(() => ({})))
+      .then(data => {
+        if (data && data.ok) {
+          setSaveStatus("Saved ✓ Results captured automatically.", "ok");
+        } else {
+          setSaveStatus("Save failed — results still shown on screen (you can copy/email).", "fail");
+        }
+      })
+      .catch(() => {
+        setSaveStatus("Save failed — results still shown on screen (you can copy/email).", "fail");
+      });
+    }
+
     // Build a clean plain-text report for copy/email
     function buildResultsText() {
       const parentEmail = $("parentEmail").value.trim();
 
-      // Scores from rendered bars (we also keep last computed values in globals)
       const lines = [];
       lines.push("SOCIAL POSITIONING DIAGNOSTIC™");
       lines.push("");
@@ -697,7 +797,6 @@
       return tmp.textContent || tmp.innerText || "";
     }
 
-    // These are called by buttons in HTML
     function copyResults() {
       try {
         const text = buildResultsText();
@@ -709,66 +808,58 @@
     }
 
     function emailResults() {
-  const parentEmailEl = $("parentEmail");
-  const parentEmail = (parentEmailEl?.value || "").trim();
+      const parentEmailEl = $("parentEmail");
+      const parentEmail = (parentEmailEl?.value || "").trim();
 
-  if (!parentEmail) {
-    showError("Please enter a parent email at the top before emailing results.");
-    parentEmailEl.scrollIntoView({ behavior: "smooth", block: "center" });
-    parentEmailEl.focus();
-    return;
-  }
-
-  // FULL report (can be very long)
-  const fullReport =
-    "Parent Email: " + parentEmail + "\n\n" +
-    buildResultsText();
-
-  // Always try to copy the full report first (so we never lose it)
-  const copyPromise = (navigator.clipboard && navigator.clipboard.writeText)
-    ? navigator.clipboard.writeText(fullReport)
-    : Promise.reject(new Error("Clipboard API not available"));
-
-  copyPromise
-    .catch(() => {
-      // Fallback for older browsers
-      try {
-        const ta = document.createElement("textarea");
-        ta.value = fullReport;
-        ta.setAttribute("readonly", "");
-        ta.style.position = "fixed";
-        ta.style.left = "-9999px";
-        document.body.appendChild(ta);
-        ta.select();
-        document.execCommand("copy");
-        document.body.removeChild(ta);
-      } catch (e) {
-        // If even fallback fails, do nothing — user can still use the Copy Results button
+      if (!parentEmail) {
+        showError("Please enter a parent email at the top before emailing results.");
+        parentEmailEl.scrollIntoView({ behavior: "smooth", block: "center" });
+        parentEmailEl.focus();
+        return;
       }
-    })
-    .finally(() => {
-      // SHORT email body to avoid mailto length limits
-      const subject = encodeURIComponent("Confidence Lab™ — Diagnostic Results");
-      const shortBody = encodeURIComponent(
+
+      const fullReport =
         "Parent Email: " + parentEmail + "\n\n" +
-        "✅ The full diagnostic report has been copied to your clipboard.\n" +
-        "Paste it into this email and hit send.\n\n" +
-        "(If nothing copied, click the on-page “Copy Results” button.)"
-      );
+        buildResultsText();
 
-      const mailtoLink = `mailto:${DESTINATION_EMAIL}?subject=${subject}&body=${shortBody}`;
+      const copyPromise = (navigator.clipboard && navigator.clipboard.writeText)
+        ? navigator.clipboard.writeText(fullReport)
+        : Promise.reject(new Error("Clipboard API not available"));
 
-      // More reliable launch than window.location.href in some environments
-      const a = document.createElement("a");
-      a.href = mailtoLink;
-      a.style.display = "none";
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-    });
-}
+      copyPromise
+        .catch(() => {
+          try {
+            const ta = document.createElement("textarea");
+            ta.value = fullReport;
+            ta.setAttribute("readonly", "");
+            ta.style.position = "fixed";
+            ta.style.left = "-9999px";
+            document.body.appendChild(ta);
+            ta.select();
+            document.execCommand("copy");
+            document.body.removeChild(ta);
+          } catch (e) {}
+        })
+        .finally(() => {
+          const subject = encodeURIComponent("Confidence Lab™ — Diagnostic Results");
+          const shortBody = encodeURIComponent(
+            "Parent Email: " + parentEmail + "\n\n" +
+            "✅ The full diagnostic report has been copied to your clipboard.\n" +
+            "Paste it into this email and hit send.\n\n" +
+            "(If nothing copied, click the on-page “Copy Results” button.)"
+          );
 
-    // Make functions available to onclick=""
+          const mailtoLink = `mailto:${DESTINATION_EMAIL}?subject=${subject}&body=${shortBody}`;
+
+          const a = document.createElement("a");
+          a.href = mailtoLink;
+          a.style.display = "none";
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+        });
+    }
+
     window.copyResults = copyResults;
     window.emailResults = emailResults;
 
@@ -784,10 +875,8 @@
         return;
       }
 
-      // prevent native validation silently blocking submit
       form.noValidate = true;
 
-      // Render question blocks
       questionsByIndex.forEach((block, blockIndex) => {
         const blockDiv = document.createElement("div");
         blockDiv.className = "question-block";
@@ -824,7 +913,6 @@
       btn.textContent = "Generate Diagnostic Report";
       form.appendChild(btn);
 
-      // Clear errors as user interacts
       form.addEventListener("change", () => clearError());
       $("parentEmail").addEventListener("input", () => clearError());
 
@@ -832,7 +920,6 @@
         e.preventDefault();
         clearError();
 
-        // Require parent email for your workflow (since you want results emailed to you)
         const parentEmail = $("parentEmail").value.trim();
         if (!parentEmail) {
           showError("Please enter a parent email at the top before generating results.");
@@ -841,7 +928,6 @@
           return;
         }
 
-        // Custom validation for questions
         const missing = form.querySelector("select:invalid");
         if (missing) {
           showError("You missed a question. One or more dropdowns is still set to “Select an option.”");
@@ -850,7 +936,6 @@
           return;
         }
 
-        // Compute raw totals out of 25 per index
         const totalsRaw = [0, 0, 0, 0];
 
         for (let i = 0; i < questionsByIndex.length; i++) {
@@ -862,12 +947,10 @@
           }
         }
 
-        // store for copy/email text
         window.__lastTotalsRaw = totalsRaw;
 
         const percents = totalsRaw.map(pctFromRaw);
 
-        // Render bars
         const scoreBars = $("scoreBars");
         scoreBars.innerHTML = "";
 
@@ -893,16 +976,15 @@
           });
         });
 
-        // Composite Pattern
         const pattern = pickCompositePattern(totalsRaw);
         $("composite-pattern-title").textContent = pattern.name;
         $("composite-pattern-desc").textContent  = pattern.desc;
 
-        // Primary Constraint (lowest raw) — handle ties
         const minVal = Math.min(...totalsRaw);
         const minIdxs = totalsRaw.map((v,i)=>({v,i})).filter(x=>x.v===minVal).map(x=>x.i);
 
         const primaryNames = minIdxs.map(i => indices[i].name).join(" + ");
+        const primaryShorts = minIdxs.map(i => indices[i].short).join("+");
         $("primary-constraint-title").textContent = primaryNames;
 
         const primaryDescEl = $("primary-constraint-desc");
@@ -943,7 +1025,6 @@
           primaryPlanEl.style.display = "none";
         }
 
-        // Result psychology: leverage summary + interpretation
         const strongestIdx = totalsRaw.map((v,i)=>({v,i})).sort((a,b)=>b.v-a.v)[0].i;
         const weakestIdx = minIdxs[0];
 
@@ -979,7 +1060,29 @@
           </div>
         `;
 
-        // Show results + scroll
+        // NEW: Auto-capture to Sheet
+        // Store both raw + percent + pattern + constraint + timestamp
+        saveResultsToSheet({
+          createdAtISO: new Date().toISOString(),
+          parentEmail: parentEmail,
+          scoresRaw: {
+            ESI: totalsRaw[0],
+            FCI: totalsRaw[1],
+            ASI: totalsRaw[2],
+            SRI: totalsRaw[3],
+          },
+          scoresPercent: {
+            ESI: percents[0],
+            FCI: percents[1],
+            ASI: percents[2],
+            SRI: percents[3],
+          },
+          compositePattern: pattern.name,
+          primaryConstraint: primaryNames,
+          primaryConstraintShort: primaryShorts,
+          userAgent: navigator.userAgent
+        });
+
         resultsEl.style.display = "block";
         resultsEl.scrollIntoView({ behavior: "smooth" });
       });
