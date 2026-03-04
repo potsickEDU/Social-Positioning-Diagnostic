@@ -122,6 +122,14 @@
       line-height:1.25;
     }
 
+.diagnostic-status{
+  margin-top:25px;
+  font-size:22px;
+  color:var(--warn);
+  font-weight:700;
+  text-align:center;
+}
+    
     select, input{
       width:100%;
       padding:10px;
@@ -344,6 +352,10 @@
         </div>
 
         <button type="button" onclick="copyResults()">Copy Results</button>
+
+<div class="diagnostic-status">
+⚠️ Your teen's full diagnostic interpretation has not been generated yet.
+</div>
         
        <div class="email-instructions">
 
