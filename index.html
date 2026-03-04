@@ -6,278 +6,277 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <style>
-    :root {
-      --bg-black: #0c0c1c;
-      --bg-navy: #11112A;
-      --electric-blue: #29f7ff;
-      --white: #ffffff;
-      --hud-green: #82ff7c;
-      --warn: #ffa63c;
-      --danger: #fa5959;
-      --muted: #b7faff;
+    :root{
+      --bg-black:#0c0c1c;
+      --bg-navy:#11112A;
+      --electric-blue:#29f7ff;
+      --white:#ffffff;
+      --hud-green:#82ff7c;
+      --warn:#ffa63c;
+      --danger:#fa5959;
+      --muted:#b7faff;
+      --panel:#0b1024a8;
+      --panel-border:#29f7ff44;
     }
 
-    body {
-      margin: 0;
-      padding: 0;
-      background: linear-gradient(135deg, var(--bg-black), var(--bg-navy));
-      color: var(--white);
-      font-family: Arial, sans-serif;
+    body{
+      margin:0;
+      padding:0;
+      background:linear-gradient(135deg,var(--bg-black),var(--bg-navy));
+      color:var(--white);
+      font-family:Arial, sans-serif;
     }
 
-    .container {
-      max-width: 780px;
-      margin: 0 auto;
-      padding: 30px 20px;
+    .container{
+      max-width:820px;
+      margin:0 auto;
+      padding:28px 18px 48px 18px;
     }
 
-    h1 {
-      text-align: center;
-      font-size: 2.4rem;
-      margin-bottom: 0.2em;
-      font-weight: 900;
-      color: var(--electric-blue);
+    h1{
+      text-align:center;
+      font-size:2.35rem;
+      margin:0 0 8px 0;
+      font-weight:900;
+      color:var(--electric-blue);
+      letter-spacing:0.01em;
     }
 
-    h2 {
-      text-align: center;
-      font-size: 1.6rem;
-      margin-top: 10px;
-      color: var(--electric-blue);
-      font-weight: 900;
+    .subtitle{
+      text-align:center;
+      color:var(--muted);
+      line-height:1.45;
+      max-width:680px;
+      margin:0 auto 18px auto;
+      font-size:1rem;
     }
 
-    p.subtitle {
-      text-align: center;
-      color: var(--muted);
-      line-height: 1.45;
-      max-width: 640px;
-      margin: 0 auto 22px auto;
-      font-size: 1rem;
+    .card{
+      width:95%;
+      margin:10px auto 14px auto;
+      padding:14px 14px;
+      border-radius:12px;
+      border:1px solid var(--panel-border);
+      background:var(--panel);
+      box-shadow:0 1px 14px #09297355;
     }
 
-    .intro-card {
-      width: 95%;
-      margin: 0 auto 18px auto;
-      padding: 14px 14px;
-      border-radius: 12px;
-      border: 1px solid #29f7ff44;
-      background: #0b1024a8;
-      box-shadow: 0 1px 14px #09297355;
+    .kicker{
+      color:var(--muted);
+      font-size:0.95rem;
+      letter-spacing:0.06em;
+      text-transform:uppercase;
+      font-weight:900;
     }
 
-    .intro-card .label {
-      color: var(--muted);
-      font-size: 0.95rem;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      font-weight: 900;
+    .headline{
+      margin-top:6px;
+      font-size:1.15rem;
+      font-weight:900;
+      color:var(--electric-blue);
     }
 
-    .intro-card .title {
-      margin-top: 6px;
-      font-size: 1.1rem;
-      font-weight: 900;
-      color: var(--electric-blue);
+    .body{
+      margin-top:6px;
+      color:var(--muted);
+      line-height:1.55;
     }
 
-    .intro-card .text {
-      margin-top: 6px;
-      color: var(--muted);
-      line-height: 1.5;
+    .question-block{
+      margin:18px auto 22px auto;
+      width:95%;
+      border:1px solid rgba(41,247,255,0.30);
+      border-radius:12px;
+      padding:14px 14px;
+      background:rgba(0,0,0,0.22);
     }
 
-    .question-block {
-      margin-bottom: 24px;
-      border: 1px solid rgba(41, 247, 255, 0.3);
-      border-radius: 10px;
-      padding: 15px 15px;
-      background: rgba(0, 0, 0, 0.25);
+    .question-block h3{
+      margin:0 0 6px 0;
+      color:var(--electric-blue);
+      font-size:1.18rem;
+      font-weight:900;
     }
 
-    .question-block h3 {
-      margin: 0 0 5px 0;
-      color: var(--electric-blue);
-      font-size: 1.2rem;
+    .question-block p{
+      margin:0 0 12px 0;
+      color:var(--muted);
+      font-size:0.95rem;
+      line-height:1.45;
     }
 
-    .question-block p {
-      margin: 0 0 14px 0;
-      color: var(--muted);
-      font-size: 0.95rem;
+    .question{
+      margin:12px 0;
+      padding:12px;
+      border-radius:10px;
+      background:rgba(255,255,255,0.04);
+      border:1px solid rgba(255,255,255,0.10);
     }
 
-    .question {
-      margin: 14px 0;
-      padding: 12px;
-      border-radius: 8px;
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid rgba(255, 255, 255, 0.08);
+    .question label{
+      display:block;
+      margin-bottom:8px;
+      font-size:1rem;
+      color:var(--white);
+      font-weight:800;
+      line-height:1.25;
     }
 
-    .question label {
-      display: block;
-      margin-bottom: 8px;
-      font-size: 1rem;
-      color: var(--white);
-      font-weight: 700;
-      line-height: 1.25;
+    select{
+      width:100%;
+      padding:10px;
+      border-radius:8px;
+      border:1px solid rgba(255,255,255,0.14);
+      font-size:1rem;
+      background:#1b1b3a;
+      color:var(--white);
+      outline:none;
     }
 
-    select {
-      width: 100%;
-      padding: 10px;
-      border-radius: 6px;
-      border: none;
-      font-size: 1rem;
-      background: #1b1b3a;
-      color: var(--white);
-      outline: none;
+    button{
+      display:block;
+      width:95%;
+      margin:18px auto 0 auto;
+      padding:14px 10px;
+      border:none;
+      border-radius:10px;
+      background:var(--electric-blue);
+      color:#0c0c1c;
+      font-size:1.08rem;
+      font-weight:900;
+      cursor:pointer;
+      transition:transform 0.08s ease-in-out, filter 0.12s ease-in-out;
     }
 
-    button {
-      display: block;
-      width: 100%;
-      padding: 14px 10px;
-      margin-top: 18px;
-      border: none;
-      border-radius: 8px;
-      background: var(--electric-blue);
-      color: #0c0c1c;
-      font-size: 1.1rem;
-      font-weight: 900;
-      cursor: pointer;
-      transition: transform 0.08s ease-in-out;
+    button:hover{ transform:scale(1.01); filter:brightness(1.02); }
+
+    .error-banner{
+      display:none;
+      width:95%;
+      margin:12px auto 0 auto;
+      padding:12px 12px;
+      border-radius:10px;
+      border:1px solid rgba(250,89,89,0.45);
+      background:rgba(250,89,89,0.10);
+      color:#ffd7d7;
+      line-height:1.45;
+      font-weight:800;
     }
 
-    button:hover { transform: scale(1.01); }
-
-    .results {
-      display: none;
-      margin-top: 30px;
-      padding: 20px;
-      border-radius: 10px;
-      border: 1px solid rgba(41, 247, 255, 0.4);
-      background: rgba(0, 0, 0, 0.22);
+    /* RESULTS */
+    .results{
+      display:none;
+      width:95%;
+      margin:22px auto 0 auto;
+      padding:18px 14px;
+      border-radius:12px;
+      border:1px solid rgba(41,247,255,0.45);
+      background:rgba(0,0,0,0.22);
     }
 
-    .score-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      margin: 14px 0;
+    .results h2{
+      text-align:center;
+      margin:0 0 6px 0;
+      color:var(--electric-blue);
+      font-weight:900;
+      font-size:1.7rem;
     }
 
-    .score-row .label {
-      min-width: 190px;
-      color: var(--electric-blue);
-      font-weight: 900;
-      line-height: 1.1;
+    .results .subtitle{
+      margin-bottom:14px;
     }
 
-    .bar-wrap {
-      flex: 1;
-      height: 14px;
-      background: rgba(255, 255, 255, 0.08);
-      border-radius: 30px;
-      overflow: hidden;
-      border: 1px solid rgba(255, 255, 255, 0.15);
+    .score-row{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      margin:12px 0;
     }
 
-    .bar-fill {
-      height: 100%;
-      width: 0%;
-      border-radius: 30px;
-      background: var(--electric-blue);
-      transition: width 0.4s ease-in-out;
+    .score-row .label{
+      min-width:190px;
+      color:var(--electric-blue);
+      font-weight:900;
+      line-height:1.1;
     }
 
-    .score-row .val {
-      min-width: 110px;
-      text-align: right;
-      font-weight: 900;
-      color: var(--white);
+    .bar-wrap{
+      flex:1;
+      height:14px;
+      background:rgba(255,255,255,0.08);
+      border-radius:30px;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,0.15);
     }
 
-    .card {
-      width: 95%;
-      margin: 10px auto 14px auto;
-      padding: 14px 14px;
-      border-radius: 12px;
-      border: 1px solid #29f7ff44;
-      background: #0b1024a8;
-      box-shadow: 0 1px 14px #09297355;
+    .bar-fill{
+      height:100%;
+      width:0%;
+      border-radius:30px;
+      background:var(--electric-blue);
+      transition:width 0.5s ease-in-out;
     }
 
-    .card .kicker {
-      color: var(--muted);
-      font-size: 0.95rem;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      font-weight: 900;
+    .score-row .val{
+      min-width:126px;
+      text-align:right;
+      font-weight:900;
+      color:var(--white);
     }
 
-    .card .headline {
-      margin-top: 6px;
-      font-size: 1.15rem;
-      font-weight: 900;
-      color: var(--electric-blue);
+    .micro-plan{
+      margin-top:10px;
+      padding:12px;
+      border-radius:10px;
+      border:1px solid rgba(255,255,255,0.12);
+      background:rgba(255,255,255,0.04);
+      color:var(--muted);
+      line-height:1.55;
     }
 
-    .card .body {
-      margin-top: 6px;
-      color: var(--muted);
-      line-height: 1.5;
+    .cta{
+      margin-top:18px;
+      padding-top:14px;
+      border-top:1px solid rgba(255,255,255,0.12);
+      text-align:center;
     }
 
-    .micro-plan {
-      margin-top: 10px;
-      padding: 12px;
-      border-radius: 10px;
-      border: 1px solid rgba(255,255,255,0.12);
-      background: rgba(255,255,255,0.04);
-      color: var(--muted);
-      line-height: 1.5;
+    .cta a{
+      display:inline-block;
+      padding:12px 14px;
+      border-radius:10px;
+      background:var(--hud-green);
+      color:#0c0c1c;
+      font-weight:900;
+      text-decoration:none;
+      margin-top:10px;
     }
 
-    .cta {
-      margin-top: 18px;
-      padding-top: 14px;
-      border-top: 1px solid rgba(255,255,255,0.12);
-      text-align: center;
+    .fineprint{
+      margin-top:10px;
+      color:rgba(183,250,255,0.82);
+      font-size:0.92rem;
+      line-height:1.45;
+      max-width:700px;
+      margin-left:auto;
+      margin-right:auto;
     }
 
-    .cta a {
-      display: inline-block;
-      padding: 12px 14px;
-      border-radius: 10px;
-      background: var(--hud-green);
-      color: #0c0c1c;
-      font-weight: 900;
-      text-decoration: none;
-      margin-top: 10px;
+    .score-explanation{
+      width:100%;
+      margin-top:10px;
+      color:var(--white);
+      line-height:1.6;
     }
 
-    .fineprint {
-      margin-top: 10px;
-      color: rgba(183, 250, 255, 0.8);
-      font-size: 0.9rem;
-      line-height: 1.45;
-    }
+    .score-explanation b{ color:var(--electric-blue); }
 
-    .score-explanation {
-      width: 95%;
-      margin: 10px auto 0 auto;
-      color: var(--white);
-      line-height: 1.55;
-    }
-
-    .score-explanation b { color: var(--electric-blue); }
-
-    @media (max-width: 540px) {
-      .score-row { flex-direction: column; align-items: stretch; }
-      .score-row .label, .score-row .val { min-width: auto; text-align: left; }
+    @media (max-width:560px){
+      .score-row{ flex-direction:column; align-items:stretch; }
+      .score-row .label, .score-row .val{ min-width:auto; text-align:left; }
+      button{ width:100%; }
+      .card, .question-block, .results, .error-banner{ width:100%; }
     }
   </style>
 </head>
@@ -286,39 +285,41 @@
   <div class="container">
     <h1>Social Positioning Diagnostic™</h1>
     <p class="subtitle">
-      A 3–4 minute assessment that measures how a teen’s social execution shows up in real group environments.
+      A 3–4 minute diagnostic that measures how a teen’s social execution shows up in real group environments.
       This is not a personality label — it’s a <b>performance snapshot</b> you can train.
     </p>
 
-    <div class="intro-card">
-      <div class="label">How to Answer</div>
-      <div class="title">Answer based on real behavior — not best intentions.</div>
-      <div class="text">
-        Choose the option that matches what typically happens in group settings (class, sports, clubs, friend groups).
-        The output identifies a <b>Composite Pattern</b> and the <b>Primary Constraint</b> currently limiting visible outcomes.
+    <div class="card">
+      <div class="kicker">How to Answer</div>
+      <div class="headline">Answer based on real behavior — not best intentions.</div>
+      <div class="body">
+        Choose what typically happens in group settings (class, sports, clubs, friend groups).
+        The output identifies a <b>Composite Pattern</b> plus the <b>Primary Constraint</b> currently limiting visible outcomes.
       </div>
     </div>
+
+    <div class="error-banner" id="errorBanner"></div>
 
     <form id="diagnosticForm"></form>
 
     <div class="results" id="results">
       <h2>Your Results</h2>
-      <p class="subtitle" id="resultsSubtitle">
-        Below is a signal readout across four indices. The goal is not “high scores” — the goal is to identify
-        the <b>one variable</b> that unlocks the next level of visible social outcomes.
+      <p class="subtitle">
+        This report is designed to produce clarity, not comfort: you’re looking for the <b>constraint</b>.
+        Raise that first and outcomes change faster.
       </p>
 
       <div id="scoreBars"></div>
 
-      <!-- Composite Pattern (should appear BEFORE Primary Constraint) -->
-      <div class="card" id="composite-pattern-card">
+      <!-- Composite Pattern (BEFORE Primary Constraint) -->
+      <div class="card">
         <div class="kicker">Composite Pattern</div>
         <div class="headline" id="composite-pattern-title">—</div>
         <div class="body" id="composite-pattern-desc">—</div>
       </div>
 
       <!-- Primary Constraint -->
-      <div class="card" id="primary-constraint-card">
+      <div class="card">
         <div class="kicker">Primary Constraint</div>
         <div class="headline" id="primary-constraint-title">—</div>
         <div class="body" id="primary-constraint-desc">—</div>
@@ -332,7 +333,7 @@
           Want a training prescription (not generic advice)?
         </div>
         <div class="fineprint">
-          Confidence Lab™ uses targeted reps to raise the constraint index first — so outcomes change faster and stick.
+          Confidence Lab™ raises the constraint index first using short, engineered reps — so the teen’s strengths become visible in groups.
         </div>
         <a href="your-confidence-lab-application-link.com" target="_blank" rel="noopener noreferrer">
           Apply for Confidence Lab™
@@ -343,362 +344,400 @@
 
   <script>
     window.addEventListener("DOMContentLoaded", () => {
-  // -------------------------
-  // Data
-  // -------------------------
-  const indices = [
-    { name: "Entry Speed Index (ESI)", short: "ESI", desc: "How quickly and fluidly the teen initiates social connections and enters group situations." },
-    { name: "Friction Control Index (FCI)", short: "FCI", desc: "How effectively the teen minimizes awkwardness, recovers from missteps, and harmonizes with group norms." },
-    { name: "Authority Signal Index (ASI)", short: "ASI", desc: "How strongly the teen projects confidence, credibility, and social leadership." },
-    { name: "Selection Readiness Index (SRI)", short: "SRI", desc: "How ready the teen is to be chosen by peers for collaboration, leadership, or friendship opportunities." },
-  ];
 
-  const questionsByIndex = [
-    {
-      indexShort: "ESI",
-      title: "Entry Speed",
-      blurb: "How fast your teen initiates and steps into social moments.",
-      questions: [
-        "I feel at ease joining new group conversations.",
-        "I greet others promptly when I enter a room.",
-        "I know how to introduce myself in unfamiliar social settings.",
-        "I rarely hesitate to approach peers I don’t know well.",
-        "I can start conversations without needing others to pull me in.",
-      ],
-    },
-    {
-      indexShort: "FCI",
-      title: "Friction Control",
-      blurb: "How well your teen handles awkwardness, pressure, and missteps in real time.",
-      questions: [
-        "If a moment gets awkward, I recover without spiraling.",
-        "I can handle teasing or social pushback without shutting down.",
-        "I can read the room and adjust my behavior quickly.",
-        "I don’t get stuck replaying mistakes after social situations.",
-        "I can stay calm and keep moving even when I feel judged.",
-      ],
-    },
-    {
-      indexShort: "ASI",
-      title: "Authority Signal",
-      blurb: "How clearly your teen projects presence, leadership, and credibility.",
-      questions: [
-        "People tend to listen when I speak in a group.",
-        "My voice comes out steady and clear in social settings.",
-        "I can hold eye contact comfortably when speaking.",
-        "I can disagree without getting apologetic or defensive.",
-        "I come across as confident even when I feel uncertain.",
-      ],
-    },
-    {
-      indexShort: "SRI",
-      title: "Selection Readiness",
-      blurb: "How likely your teen is to be chosen, invited, and included by peers.",
-      questions: [
-        "I get invited to group activities or hangouts.",
-        "People choose me for team projects or group work.",
-        "I’m seen as someone others want around socially.",
-        "I notice when opportunities are available and I step into them.",
-        "I can create momentum in friendships instead of waiting for others.",
-      ],
-    },
-  ];
+      // -------------------------
+      // Data
+      // -------------------------
+      const indices = [
+        { name: "Entry Speed Index (ESI)", short: "ESI", desc: "How quickly and fluidly the teen initiates social connections and enters group situations." },
+        { name: "Friction Control Index (FCI)", short: "FCI", desc: "How effectively the teen recovers from awkwardness, pressure, or missteps and stays composed." },
+        { name: "Authority Signal Index (ASI)", short: "ASI", desc: "How strongly the teen projects presence, credibility, and leadership signal in groups." },
+        { name: "Selection Readiness Index (SRI)", short: "SRI", desc: "How reliably the teen converts presence into invites, inclusion, and being chosen." },
+      ];
 
-  const responseOptions = [
-    { label: "Strongly Disagree", value: 1 },
-    { label: "Disagree", value: 2 },
-    { label: "Neutral", value: 3 },
-    { label: "Agree", value: 4 },
-    { label: "Strongly Agree", value: 5 },
-  ];
+      const questionsByIndex = [
+        {
+          indexShort: "ESI",
+          title: "Entry Speed",
+          blurb: "How quickly they enter conversations, greet, initiate, and claim a spot in the group timeline.",
+          questions: [
+            "I feel at ease joining new group conversations.",
+            "I greet others promptly when I enter a room.",
+            "I know how to introduce myself in unfamiliar social settings.",
+            "I rarely hesitate to approach peers I don’t know well.",
+            "I can start conversations without needing others to pull me in.",
+          ],
+        },
+        {
+          indexShort: "FCI",
+          title: "Friction Control",
+          blurb: "How well they handle awkwardness, pressure, teasing, and social bumps in real time.",
+          questions: [
+            "If a moment gets awkward, I recover without spiraling.",
+            "I can handle teasing or social pushback without shutting down.",
+            "I can read the room and adjust quickly.",
+            "I don’t get stuck replaying mistakes after social situations.",
+            "I can stay calm and keep moving even when I feel judged.",
+          ],
+        },
+        {
+          indexShort: "ASI",
+          title: "Authority Signal",
+          blurb: "How clearly they project presence (voice, eye contact, decisiveness) so others register them.",
+          questions: [
+            "People tend to listen when I speak in a group.",
+            "My voice comes out steady and clear in social settings.",
+            "I can hold eye contact comfortably when speaking.",
+            "I can disagree without getting apologetic or defensive.",
+            "I come across as confident even when I feel uncertain.",
+          ],
+        },
+        {
+          indexShort: "SRI",
+          title: "Selection Readiness",
+          blurb: "How likely they are to be chosen, invited, included — and how much they create social momentum.",
+          questions: [
+            "I get invited to group activities or hangouts.",
+            "People choose me for team projects or group work.",
+            "I’m seen as someone others want around socially.",
+            "I notice opportunities and I step into them.",
+            "I can create momentum in friendships instead of waiting for others.",
+          ],
+        },
+      ];
 
-  // -------------------------
-  // Helpers
-  // -------------------------
-  const $ = (id) => document.getElementById(id);
+      const responseOptions = [
+        { label: "Strongly Disagree", value: 1 },
+        { label: "Disagree", value: 2 },
+        { label: "Neutral", value: 3 },
+        { label: "Agree", value: 4 },
+        { label: "Strongly Agree", value: 5 },
+      ];
 
-  function zoneFromRaw(raw) {
-    if (raw >= 20) return { label: "Strong Signal Zone", color: "var(--hud-green)" };
-    if (raw >= 15) return { label: "Developing Signal Zone", color: "var(--electric-blue)" };
-    if (raw >= 10) return { label: "Hesitation Threshold", color: "var(--warn)" };
-    return { label: "Suppressed Execution", color: "var(--danger)" };
-  }
+      // -------------------------
+      // Helpers
+      // -------------------------
+      const $ = (id) => document.getElementById(id);
 
-  function pctFromRaw(raw) {
-    return Math.round((raw / 25) * 100);
-  }
-
-  function pickCompositePattern(rawArr) {
-    const [esi, fci, asi, sri] = rawArr;
-
-    const low  = (x) => x < 10;
-    const dev  = (x) => x >= 15 && x < 20;
-    const high = (x) => x >= 20;
-
-    const lows = [esi, fci, asi, sri].filter(low).length;
-    const highs = [esi, fci, asi, sri].filter(high).length;
-
-    if (lows >= 3) {
-      return {
-        name: "Foundational Visibility Suppression Pattern",
-        desc: "Signals are broadly muted. Capability may exist, but execution doesn’t reliably show up in real-time group moments yet. Raise the lowest index first to unlock visible outcomes."
-      };
-    }
-
-    if (low(esi) && !low(fci) && !low(asi) && !low(sri)) {
-      return {
-        name: "Deferred Entry Pattern",
-        desc: "The teen can operate once ‘in,’ but entry timing is delayed. This causes missed windows (joining, greeting, initiating) and keeps strengths off-screen."
-      };
-    }
-
-    if (low(fci) && (dev(asi) || high(asi) || dev(sri) || high(sri))) {
-      return {
-        name: "Fragile Under Friction Pattern",
-        desc: "Capability exists, but small bumps (pressure, awkwardness, unpredictability) disrupt flow. Recovery reps create the fastest gains."
-      };
-    }
-
-    if (low(asi) && (high(fci) || high(esi) || dev(fci) || dev(esi))) {
-      return {
-        name: "Under-Signaled Authority Pattern",
-        desc: "Competence may be present, but leadership/presence signals don’t register strongly — so the teen gets under-selected for influence and initiative."
-      };
-    }
-
-    if (low(sri) && (high(fci) || high(esi) || high(asi) || dev(fci) || dev(esi) || dev(asi))) {
-      return {
-        name: "Invisible High-Capability Pattern",
-        desc: "They can perform socially, but selection outcomes lag (invites, teaming, being chosen). The issue is translation into pickability, not raw ability."
-      };
-    }
-
-    if (high(asi) && (low(fci) || low(sri))) {
-      return {
-        name: "Surface Authority / Low Depth Pattern",
-        desc: "Strong front-of-room signal, but inconsistency underneath (friction recovery / trust / sustained selection). Training focuses on stability so authority reads as safe and reliable."
-      };
-    }
-
-    if (highs === 0 && [esi, fci, asi, sri].every(dev)) {
-      return {
-        name: "Emerging Operator",
-        desc: "Solid baseline across the board. With targeted reps, this profile converts quickly into stronger visible positioning — especially by raising the lowest index first."
-      };
-    }
-
-    return {
-      name: "Under-Conditioned Operator",
-      desc: "Signals are uneven or under-trained. The next step is a single-variable plan based on the lowest index (Primary Constraint)."
-    };
-  }
-
-  function microPlanForPrimary(short) {
-    const plans = {
-      "ESI": [
-        "3 reps/day: initiate first (greeting, question, comment) within 5 seconds of an opening.",
-        "1 join rep/day: enter an existing conversation with a bridge line (e.g., “Wait—what are we talking about?”).",
-        "Track: entered fast vs waited to be pulled in."
-      ],
-      "FCI": [
-        "3 reps/day: recover from friction with one neutral reset line (e.g., “All good.” / “Anyway—”).",
-        "1 pressure rep/day: speak once in a moment normally avoided (short + calm).",
-        "Track: time-to-baseline after a bump."
-      ],
-      "ASI": [
-        "3 reps/day: speak 1 notch louder + finish sentences cleanly (no trailing off).",
-        "1 disagree rep/day: calm opposite opinion without apology.",
-        "Track: eye contact + voice steadiness for first 3 seconds."
-      ],
-      "SRI": [
-        "3 reps/day: create one micro-invite (sit together, join a game, study, walk).",
-        "1 selection rep/day: volunteer for a role (partner, captain, presenter, helper).",
-        "Track: waited to be chosen vs made yourself choosable."
-      ],
-    };
-    return plans[short] || [];
-  }
-
-  // -------------------------
-  // Init / Render
-  // -------------------------
-  const form = $("diagnosticForm");
-  console.log("INIT: form found?", !!form);
-
-  if (!form) {
-    console.error("diagnosticForm not found. Check id='diagnosticForm' exists exactly once.");
-    return;
-  }
-
-  // prevent silent native validation blocks
-  form.noValidate = true;
-
-  // Build the form UI
-  form.innerHTML = "";
-
-  questionsByIndex.forEach((block, idxBlock) => {
-    const blockDiv = document.createElement("div");
-    blockDiv.className = "question-block";
-
-    blockDiv.innerHTML = `
-      <h3>${idxBlock + 1}. ${block.title} (${block.indexShort})</h3>
-      <p>${block.blurb}</p>
-    `;
-
-    block.questions.forEach((qText, qIdx) => {
-      const qDiv = document.createElement("div");
-      qDiv.className = "question";
-
-      const fieldName = `${block.indexShort}_${qIdx}`;
-      const optionsHTML = responseOptions
-        .map(o => `<option value="${o.value}">${o.label}</option>`)
-        .join("");
-
-      qDiv.innerHTML = `
-        <label for="${fieldName}">${qText}</label>
-        <select id="${fieldName}" name="${fieldName}" required>
-          <option value="" disabled selected>Select an option</option>
-          ${optionsHTML}
-        </select>
-      `;
-      blockDiv.appendChild(qDiv);
-    });
-
-    form.appendChild(blockDiv);
-  });
-
-  const btn = document.createElement("button");
-  btn.id = "getDiagnosticBtn";
-  btn.type = "submit";
-  btn.textContent = "Generate Diagnostic Report";
-  btn.addEventListener("click", () => console.log("BUTTON CLICKED"));
-  form.appendChild(btn);
-
-  // -------------------------
-  // Submit
-  // -------------------------
-  form.addEventListener("submit", function (e) {
-    e.preventDefault();
-    console.log("SUBMIT FIRED");
-
-    // Custom validation (clear + scroll)
-    const missing = form.querySelector("select:invalid");
-    if (missing) {
-      alert("You missed a question. One or more dropdowns is still on “Select an option.”");
-      missing.scrollIntoView({ behavior: "smooth", block: "center" });
-      missing.focus();
-      return;
-    }
-
-    const totalsRaw = [0, 0, 0, 0];
-
-    for (let i = 0; i < questionsByIndex.length; i++) {
-      const block = questionsByIndex[i];
-      for (let qIdx = 0; qIdx < block.questions.length; qIdx++) {
-        const fieldName = `${block.indexShort}_${qIdx}`;
-        const val = parseInt(document.getElementById(fieldName).value, 10);
-        totalsRaw[i] += val;
+      function showError(msg) {
+        const b = $("errorBanner");
+        b.textContent = msg;
+        b.style.display = "block";
       }
-    }
 
-    const percents = totalsRaw.map(pctFromRaw);
+      function clearError() {
+        const b = $("errorBanner");
+        b.textContent = "";
+        b.style.display = "none";
+      }
 
-    // Bars
-    const scoreBars = $("scoreBars");
-    scoreBars.innerHTML = "";
-    totalsRaw.forEach((raw, idx) => {
-      const pct = percents[idx];
-      const z = zoneFromRaw(raw);
+      function zoneFromRaw(raw) {
+        // Official zones (0–25)
+        if (raw >= 20) return { label: "Strong Signal Zone", color: "var(--hud-green)" };
+        if (raw >= 15) return { label: "Developing Signal Zone", color: "var(--electric-blue)" };
+        if (raw >= 10) return { label: "Hesitation Threshold", color: "var(--warn)" };
+        return { label: "Suppressed Execution", color: "var(--danger)" };
+      }
 
-      const row = document.createElement("div");
-      row.className = "score-row";
-      row.innerHTML = `
-        <div class="label">${indices[idx].name}<br/>(${indices[idx].short})</div>
-        <div class="bar-wrap"><div class="bar-fill" id="bar_${idx}"></div></div>
-        <div class="val">
-          <div style="font-size:1.05rem;">${raw}/25</div>
-          <div style="font-size:0.85rem; color:${z.color}; font-weight:900;">${z.label}</div>
-        </div>
-      `;
-      scoreBars.appendChild(row);
+      function pctFromRaw(raw) {
+        return Math.round((raw / 25) * 100);
+      }
 
-      requestAnimationFrame(() => {
-        const fill = document.getElementById(`bar_${idx}`);
-        if (fill) fill.style.width = `${pct}%`;
+      function pickCompositePattern(rawArr) {
+        const [esi, fci, asi, sri] = rawArr;
+
+        const low  = (x) => x < 10;
+        const dev  = (x) => x >= 15 && x < 20;
+        const high = (x) => x >= 20;
+
+        const lows  = [esi, fci, asi, sri].filter(low).length;
+        const highs = [esi, fci, asi, sri].filter(high).length;
+
+        if (lows >= 3) {
+          return {
+            name: "Foundational Visibility Suppression Pattern",
+            desc: "Signals are broadly muted. Capability may exist, but execution doesn’t reliably show up in live group moments yet. The fastest route is raising the lowest index first so the teen’s strengths begin registering."
+          };
+        }
+
+        if (low(esi) && !low(fci) && !low(asi) && !low(sri)) {
+          return {
+            name: "Deferred Entry Pattern",
+            desc: "They can operate once they’re ‘in,’ but entry timing is delayed. That costs early windows (greeting, joining, initiating) and keeps strengths off-screen."
+          };
+        }
+
+        if (low(fci) && (dev(asi) || high(asi) || dev(sri) || high(sri))) {
+          return {
+            name: "Fragile Under Friction Pattern",
+            desc: "Capability exists, but small bumps (pressure, awkwardness, unpredictability) disrupt flow. The biggest gains come from recovery reps that return the teen to baseline quickly."
+          };
+        }
+
+        if (low(asi) && (high(fci) || high(esi) || dev(fci) || dev(esi))) {
+          return {
+            name: "Under-Signaled Authority Pattern",
+            desc: "Competence may be present, but presence/leadership signals don’t register strongly. The teen becomes under-selected for influence, initiative, and social direction."
+          };
+        }
+
+        if (low(sri) && (high(fci) || high(esi) || high(asi) || dev(fci) || dev(esi) || dev(asi))) {
+          return {
+            name: "Invisible High-Capability Pattern",
+            desc: "They can perform socially, but selection outcomes lag (invites, teaming, being chosen). The constraint is translation into pickability, not raw ability."
+          };
+        }
+
+        if (high(asi) && (low(fci) || low(sri))) {
+          return {
+            name: "Surface Authority / Low Depth Pattern",
+            desc: "Strong front-of-room signal, but inconsistency underneath (friction recovery / trust / sustained selection). Training focuses on stability so authority reads as safe and reliable."
+          };
+        }
+
+        if (highs === 0 && [esi, fci, asi, sri].every(dev)) {
+          return {
+            name: "Emerging Operator",
+            desc: "Solid baseline across the board. With targeted reps, this profile typically converts quickly into strong visible positioning — especially by raising the lowest index first."
+          };
+        }
+
+        return {
+          name: "Under-Conditioned Operator",
+          desc: "Signals are uneven or under-trained. The next step is a single-variable training plan based on the Primary Constraint so outcomes change faster and stick."
+        };
+      }
+
+      function microPlanForPrimary(short) {
+        const plans = {
+          "ESI": [
+            "3 reps/day: initiate first (greeting, question, comment) within 5 seconds of an opening.",
+            "1 join rep/day: enter an existing conversation with a bridge line (“Wait—what are we talking about?”).",
+            "Track: entered fast vs waited to be pulled in."
+          ],
+          "FCI": [
+            "3 reps/day: recover from friction with one neutral reset line (“All good.” / “Anyway—”).",
+            "1 pressure rep/day: speak once in a moment normally avoided (short + calm).",
+            "Track: time-to-baseline after a bump."
+          ],
+          "ASI": [
+            "3 reps/day: speak 1 notch louder + finish sentences cleanly (no trailing off).",
+            "1 disagree rep/day: calm opposite opinion without apology.",
+            "Track: eye contact + voice steadiness for the first 3 seconds."
+          ],
+          "SRI": [
+            "3 reps/day: create one micro-invite (sit together, join a game, study, walk).",
+            "1 selection rep/day: volunteer for a role (partner, captain, presenter, helper).",
+            "Track: waited to be chosen vs made yourself choosable."
+          ],
+        };
+        return plans[short] || [];
+      }
+
+      // -------------------------
+      // Build Form
+      // -------------------------
+      const form = $("diagnosticForm");
+      const resultsEl = $("results");
+
+      if (!form) {
+        // If this happens, the HTML is missing the form id
+        alert("Setup error: diagnosticForm not found. Make sure your HTML contains <form id='diagnosticForm'></form>.");
+        return;
+      }
+
+      // Prevent browser native validation from silently blocking submit.
+      form.noValidate = true;
+
+      // Render question blocks
+      questionsByIndex.forEach((block, blockIndex) => {
+        const blockDiv = document.createElement("div");
+        blockDiv.className = "question-block";
+        blockDiv.innerHTML = `
+          <h3>${blockIndex + 1}. ${block.title} (${block.indexShort})</h3>
+          <p>${block.blurb}</p>
+        `;
+
+        block.questions.forEach((qText, qIdx) => {
+          const qDiv = document.createElement("div");
+          qDiv.className = "question";
+
+          const fieldName = `${block.indexShort}_${qIdx}`;
+          const optionsHTML = responseOptions.map(o =>
+            `<option value="${o.value}">${o.label}</option>`
+          ).join("");
+
+          qDiv.innerHTML = `
+            <label for="${fieldName}">${qText}</label>
+            <select id="${fieldName}" name="${fieldName}" required>
+              <option value="" disabled selected>Select an option</option>
+              ${optionsHTML}
+            </select>
+          `;
+
+          blockDiv.appendChild(qDiv);
+        });
+
+        form.appendChild(blockDiv);
+      });
+
+      const btn = document.createElement("button");
+      btn.type = "submit";
+      btn.textContent = "Generate Diagnostic Report";
+      form.appendChild(btn);
+
+      // Helpful UX: clear error once user changes any selection
+      form.addEventListener("change", () => clearError());
+
+      // -------------------------
+      // Submit
+      // -------------------------
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        clearError();
+
+        // Custom validation: find first invalid select
+        const missing = form.querySelector("select:invalid");
+        if (missing) {
+          showError("You missed a question. One or more dropdowns is still set to “Select an option.”");
+          missing.scrollIntoView({ behavior: "smooth", block: "center" });
+          missing.focus();
+          return;
+        }
+
+        // Compute raw totals out of 25 per index
+        const totalsRaw = [0, 0, 0, 0];
+
+        for (let i = 0; i < questionsByIndex.length; i++) {
+          const block = questionsByIndex[i];
+          for (let qIdx = 0; qIdx < block.questions.length; qIdx++) {
+            const fieldName = `${block.indexShort}_${qIdx}`;
+            const el = document.getElementById(fieldName);
+            const val = parseInt(el.value, 10);
+            totalsRaw[i] += val;
+          }
+        }
+
+        const percents = totalsRaw.map(pctFromRaw);
+
+        // Render bars
+        const scoreBars = $("scoreBars");
+        scoreBars.innerHTML = "";
+
+        totalsRaw.forEach((raw, idx) => {
+          const pct = percents[idx];
+          const z = zoneFromRaw(raw);
+
+          const row = document.createElement("div");
+          row.className = "score-row";
+          row.innerHTML = `
+            <div class="label">${indices[idx].name}<br/>(${indices[idx].short})</div>
+            <div class="bar-wrap"><div class="bar-fill" id="bar_${idx}"></div></div>
+            <div class="val">
+              <div style="font-size:1.05rem;">${raw}/25</div>
+              <div style="font-size:0.85rem; color:${z.color}; font-weight:900;">${z.label}</div>
+            </div>
+          `;
+          scoreBars.appendChild(row);
+
+          requestAnimationFrame(() => {
+            const fill = document.getElementById(`bar_${idx}`);
+            if (fill) fill.style.width = `${pct}%`;
+          });
+        });
+
+        // Composite Pattern
+        const pattern = pickCompositePattern(totalsRaw);
+        $("composite-pattern-title").textContent = pattern.name;
+        $("composite-pattern-desc").textContent  = pattern.desc;
+
+        // Primary Constraint (lowest raw) — handle ties
+        const minVal = Math.min(...totalsRaw);
+        const minIdxs = totalsRaw.map((v,i)=>({v,i})).filter(x=>x.v===minVal).map(x=>x.i);
+
+        const primaryNames = minIdxs.map(i => indices[i].name).join(" + ");
+        $("primary-constraint-title").textContent = primaryNames;
+
+        const primaryDescEl = $("primary-constraint-desc");
+        const primaryPlanEl = $("primary-constraint-plan");
+
+        if (minIdxs.length === 1) {
+          const i = minIdxs[0];
+          const z = zoneFromRaw(totalsRaw[i]);
+
+          primaryDescEl.innerHTML = `
+            This is the lowest index — the <b>constraint</b>. When it stays low, other strengths don’t reliably convert into
+            outcomes peers can feel (inclusion, influence, selection).
+            <br><br>
+            <b>What it controls:</b> ${indices[i].desc}<br>
+            <b>Current zone:</b> <span style="color:${z.color}; font-weight:900;">${z.label}</span>
+          `;
+
+          const micro = microPlanForPrimary(indices[i].short);
+          if (micro.length) {
+            primaryPlanEl.style.display = "block";
+            primaryPlanEl.innerHTML = `
+              <div style="font-weight:900; color: var(--electric-blue); margin-bottom:6px;">7-Day Constraint Reps</div>
+              <ul style="margin:0; padding-left:18px;">
+                ${micro.map(x => `<li>${x}</li>`).join("")}
+              </ul>
+              <div style="margin-top:10px; font-weight:900;">
+                Goal: raise <span style="color: var(--electric-blue);">${indices[i].short}</span> first — then the rest of the system starts converting into outcomes.
+              </div>
+            `;
+          } else {
+            primaryPlanEl.style.display = "none";
+          }
+        } else {
+          primaryDescEl.innerHTML = `
+            You have a <b>shared constraint</b>. When two indices tie for lowest, outcomes usually don’t shift until both rise.
+            Train them as a paired bottleneck.
+          `;
+          primaryPlanEl.style.display = "none";
+        }
+
+        // Result psychology: leverage summary + interpretation
+        const strongestIdx = totalsRaw.map((v,i)=>({v,i})).sort((a,b)=>b.v-a.v)[0].i;
+        const weakestIdx = minIdxs[0];
+
+        const expl = $("explanation");
+        expl.innerHTML = `
+          <div class="micro-plan">
+            <div style="font-weight:900; color: var(--electric-blue); margin-bottom:6px;">How to Read This Report</div>
+            <div>
+              This is a <b>behavioral signal readout</b>, not a personality label.
+              You’re looking for the <b>constraint</b> because that is what suppresses visible outcomes in groups.
+            </div>
+            <div style="margin-top:10px;">
+              <b>Strongest signal:</b> ${indices[strongestIdx].name} (${indices[strongestIdx].short})<br>
+              <b>Primary constraint:</b> ${indices[weakestIdx].name} (${indices[weakestIdx].short})
+            </div>
+            <div style="margin-top:10px;">
+              When <b>${indices[weakestIdx].short}</b> rises, the strongest signal stops being “hidden” and starts converting into:
+              being included, being listened to, being chosen, and having social momentum.
+            </div>
+          </div>
+
+          <div style="margin-top:12px;">
+            ${indices.map((ind, idx) => {
+              const raw = totalsRaw[idx];
+              const z = zoneFromRaw(raw);
+              return `
+                <div class="card" style="margin: 10px 0 0 0;">
+                  <div class="kicker">${ind.name} (${ind.short})</div>
+                  <div class="headline">${raw}/25 <span style="font-size:0.92rem; color:${z.color};">— ${z.label}</span></div>
+                  <div class="body">${ind.desc}</div>
+                </div>
+              `;
+            }).join("")}
+          </div>
+        `;
+
+        // Show results + scroll
+        resultsEl.style.display = "block";
+        resultsEl.scrollIntoView({ behavior: "smooth" });
       });
     });
-
-    // Composite Pattern
-    const pattern = pickCompositePattern(totalsRaw);
-    const cTitle = $("composite-pattern-title");
-    const cDesc  = $("composite-pattern-desc");
-    if (cTitle && cDesc) {
-      cTitle.textContent = pattern.name;
-      cDesc.textContent  = pattern.desc;
-    }
-
-    // Primary Constraint
-    const minVal = Math.min(...totalsRaw);
-    const minIdxs = totalsRaw.map((v,i)=>({v,i})).filter(x=>x.v===minVal).map(x=>x.i);
-    const primaryNames = minIdxs.map(i => indices[i].name).join(" + ");
-
-    $("primary-constraint-title").textContent = primaryNames;
-
-    const primaryDescEl = $("primary-constraint-desc");
-    const primaryPlanEl = $("primary-constraint-plan");
-
-    if (minIdxs.length === 1) {
-      const i = minIdxs[0];
-      const z = zoneFromRaw(totalsRaw[i]);
-
-      primaryDescEl.innerHTML = `
-        This is the lowest index right now — the <b>constraint</b>. When this stays low, other strengths don’t convert into
-        consistent outcomes (inclusion, influence, selection).
-        <br><br>
-        <b style="color: var(--electric-blue);">What it controls:</b> ${indices[i].desc}<br>
-        <b style="color: var(--electric-blue);">Current zone:</b> <span style="color:${z.color}; font-weight:900;">${z.label}</span>
-      `;
-
-      const micro = microPlanForPrimary(indices[i].short);
-      if (micro.length) {
-        primaryPlanEl.style.display = "block";
-        primaryPlanEl.innerHTML = `
-          <div style="font-weight:900; color: var(--electric-blue); margin-bottom:6px;">7-Day Constraint Reps</div>
-          <ul style="margin:0; padding-left:18px;">
-            ${micro.map(x => `<li>${x}</li>`).join("")}
-          </ul>
-        `;
-      } else {
-        primaryPlanEl.style.display = "none";
-      }
-    } else {
-      primaryDescEl.innerHTML = `
-        You have a <b>shared constraint</b>. When two indices tie for lowest, outcomes usually don’t shift until both rise.
-        Train them as a paired bottleneck.
-      `;
-      primaryPlanEl.style.display = "none";
-    }
-
-    // Result psychology / interpretation
-    const strongestIdx = totalsRaw.map((v,i)=>({v,i})).sort((a,b)=>b.v-a.v)[0].i;
-    const weakestIdx = minIdxs[0];
-    $("explanation").innerHTML = `
-      <div class="micro-plan">
-        <div style="font-weight:900; color: var(--electric-blue); margin-bottom:6px;">Leverage Summary</div>
-        <div><b>Strongest signal:</b> ${indices[strongestIdx].name} (${indices[strongestIdx].short})</div>
-        <div><b>Primary constraint:</b> ${indices[weakestIdx].name} (${indices[weakestIdx].short})</div>
-        <div style="margin-top:8px;">
-          Raise <b>${indices[weakestIdx].short}</b> first. That’s when the strongest signal stops being “hidden” and starts converting into
-          visible outcomes in groups.
-        </div>
-      </div>
-    `;
-
-    // Show results
-    $("results").style.display = "block";
-    $("results").scrollIntoView({ behavior: "smooth" });
-  });
-});
   </script>
 </body>
 </html>
