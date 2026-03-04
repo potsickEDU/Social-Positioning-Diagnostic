@@ -298,6 +298,79 @@
   color:var(--muted);
   line-height:1.5;
 }
+
+/* --- Results CTA spacing control --- */
+.email-instructions{
+  text-align:center;
+  margin-top: 18px;
+  line-height: 1.6;
+}
+
+.step-lines{
+  margin-top: 16px;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.email-line{
+  margin-top: 18px;
+  margin-bottom: 18px;
+}
+
+.email-address{
+  font-size: 32px;     /* adjust 30–34 sweet spot */
+  font-weight: 900;
+  color: var(--electric-blue);
+  letter-spacing: .5px;
+}
+
+.subject-block{
+  margin-top: 6px;
+  margin-bottom: 22px;
+}
+
+.subject-label{
+  font-size: 16px;
+  opacity: .9;
+}
+
+.subject-text{
+  margin-top: 4px;
+  font-size: 18px;
+}
+
+.email-note{
+  margin-top: 18px;
+  margin-bottom: 18px;
+  font-size: 18px;
+  color: var(--muted);
+}
+
+.diagnostic-benefit{
+  margin-top: 26px;   /* <-- this is the “space added” you want */
+  font-size: 18px;    /* <-- smaller */
+  color: var(--muted);
+}
+
+.diagnostic-benefit strong{
+  display:block;
+  margin-bottom: 10px;
+  font-size: 18px;    /* keep header modest */
+  color: var(--white);
+}
+
+.benefit-list{
+  font-size: 17px;
+  line-height: 1.7;
+}
+
+.response-time{
+  margin-top: 18px;
+  font-size: 16px;
+  color: var(--electric-blue);
+  font-weight: 700;
+}
+    
   </style>
 </head>
 
@@ -366,30 +439,38 @@
 </div>
         
        <div class="email-instructions">
+  <strong>NEXT STEP (30 seconds)</strong>
 
-  <strong>NEXT STEP (30 seconds)</strong><br><br>
+  <div class="step-lines">
+    <div>1️⃣ Click <b>Copy Results</b></div>
+    <div>2️⃣ Email them to:</div>
+  </div>
 
-  1️⃣ Click <b>Copy Results</b><br>
-  2️⃣ Email them to:<br><br>
+  <div class="email-line">
+    <span class="email-address">itsapotsickeducation@gmail.com</span>
+  </div>
 
-  <span class="email-address">itsapotsickeducation@gmail.com</span><br><br>
+  <div class="subject-block">
+    <div class="subject-label">Subject line:</div>
+    <div class="subject-text"><b>Confidence Lab™ — Diagnostic Results</b></div>
+  </div>
 
-  Subject line:<br>
-  <b>Confidence Lab™ — Diagnostic Results</b><br><br>
+  <div class="email-note">
+    📩 You'll receive a personalized training recommendation based on your teen’s diagnostic profile.
+  </div>
 
- <div class="email-note">
-  📩 You'll receive a personalized training recommendation based on your teen’s diagnostic profile.
-</div>
+  <div class="diagnostic-benefit">
+    <strong>What you'll receive:</strong>
+    <div class="benefit-list">
+      • Your teen’s Social Positioning Profile<br>
+      • The primary constraint affecting confidence execution<br>
+      • The most effective training focus for rapid improvement
+    </div>
+  </div>
 
-<div class="diagnostic-benefit">
-  <strong>What you'll receive:</strong><br><br>
-  • Your teen’s Social Positioning Profile<br>
-  • The primary constraint affecting confidence execution<br>
-  • The most effective training focus for rapid improvement
-</div>
-
-<div class="response-time">
-  Most parents receive their diagnostic interpretation within 24 hours.
+  <div class="response-time">
+    Most parents receive their diagnostic interpretation within 24 hours.
+  </div>
 </div>
       </div>
     </div>
