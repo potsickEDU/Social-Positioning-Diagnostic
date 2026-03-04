@@ -353,38 +353,7 @@
   font-weight: 700;
 }
 
-.snapshot-card{
-  margin: 18px auto 10px;
-  max-width: 760px;
-  background: var(--panel);
-  border: 1px solid var(--panel-border);
-  border-radius: 14px;
-  padding: 14px 16px;
-  text-align: left;
-}
-
-.snapshot-title{
-  font-size: 12px;
-  letter-spacing: 2px;
-  color: var(--muted);
-  margin-bottom: 10px;
-  font-weight: 800;
-}
-
-.snapshot-row{
-  display:flex;
-  justify-content: space-between;
-  gap: 14px;
-  padding: 8px 0;
-  border-top: 1px solid #29f7ff22;
-  font-size: 16px;
-}
-
-.snapshot-row b{
-  color: var(--electric-blue);
-  font-weight: 900;
-}
-    
+  
   </style>
 </head>
 
@@ -448,11 +417,6 @@
 
         <button type="button" onclick="copyResults()">Copy Results</button>
 
-<div class="snapshot-card" id="snapshotCard">
-  <div class="snapshot-title">YOUR SNAPSHOT</div>
-  <div class="snapshot-row"><span>Composite Pattern</span><b id="snapPattern">—</b></div>
-  <div class="snapshot-row"><span>Primary Constraint</span><b id="snapConstraint">—</b></div>
-</div>
         
 <div class="diagnostic-status">
 ⚠️ Your teen's full diagnostic interpretation has not been generated yet.
