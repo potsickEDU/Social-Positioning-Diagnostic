@@ -590,7 +590,76 @@ if (minIdxs.length === 1) {
         // Explanations
         const expl = $("explanation");
         expl.innerHTML = indices.map((ind, idx) => {
-          const s = scoreToLabel(percents[idx]);
+          const s = scoreToLabel(percents[idx]); function pickCompositePattern(p) {
+  // p = [ESI, FCI, ASI, SRI] in 0–100
+  const [esi, fci, asi, sri] = p;
+
+  const low  = (x) => x < 40;
+  const mid  = (x) => x >= 40 && x < 70;
+  const high = (x) => x >= 70;
+
+  const lows = [esi, fci, asi, sri].filter(low).length;
+  const highs = [esi, fci, asi, sri].filter(high).length;
+
+  // 1) All-low override (Foundational Visibility Suppression Pattern)
+  if (lows >= 3) {
+    return {
+      name: "Foundational Visibility Suppression Pattern",
+      desc: "Signals are broadly muted. The teen may have capability, but execution doesn’t reliably show up in real-time group moments yet."
+    };
+  }
+
+  // 2) Primary-constraint-driven patterns
+  if (low(esi) && !low(fci) && !low(asi) && !low(sri)) {
+    return {
+      name: "Deferred Entry Pattern",
+      desc: "The teen can operate once ‘in,’ but entry is delayed. This creates missed timing windows and keeps strengths off-screen."
+    };
+  }
+
+  if (low(fci) && (mid(asi) || high(asi) || mid(sri) || high(sri))) {
+    return {
+      name: "Fragile Under Friction Pattern",
+      desc: "Capability exists, but small bumps (awkwardness, pressure, unpredictability) disrupt flow. Performance drops when stakes rise."
+    };
+  }
+
+  if (low(asi) && (high(fci) || high(esi))) {
+    return {
+      name: "Under-Signaled Authority Pattern",
+      desc: "The teen may be competent and socially functional, but leadership/presence signals don’t register strongly—so they’re under-selected for influence."
+    };
+  }
+
+  if (low(sri) && (high(fci) || high(esi) || high(asi))) {
+    return {
+      name: "Invisible High-Capability Pattern",
+      desc: "They can perform socially, but selection outcomes lag (invites, teaming, being chosen). The issue is translation into ‘pickability,’ not raw ability."
+    };
+  }
+
+  // 3) High/low mismatch patterns
+  if (high(asi) && (low(fci) || low(sri))) {
+    return {
+      name: "Surface Authority / Low Depth Pattern",
+      desc: "Strong ‘front-of-room’ signal, but inconsistency underneath (friction recovery / trust / sustained selection). Can read as sharp but not safe."
+    };
+  }
+
+  // 4) Broad mid-level patterns
+  if (highs === 0 && [esi, fci, asi, sri].every(mid)) {
+    return {
+      name: "Emerging Operator",
+      desc: "Solid baseline across the board. With targeted reps, this profile typically converts quickly into strong visible positioning."
+    };
+  }
+
+  // 5) Default
+  return {
+    name: "Under-Conditioned Operator",
+    desc: "Signals are uneven or under-trained. The next step is a single-variable training plan based on the lowest index (Primary Constraint)."
+  };
+}
           return `
             <div style="margin-bottom:14px;">
               <strong style="color:var(--electric-blue);">${ind.name}:</strong>
