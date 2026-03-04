@@ -522,6 +522,39 @@
         // Percent scores (max per index = 25)
         const percents = totals.map((sum) => Math.round((sum / 25) * 100));
 
+        // --- Primary Constraint (lowest index) ---
+const minVal = Math.min(...percents);
+const minIdxs = percents
+  .map((v, i) => ({ v, i }))
+  .filter(x => x.v === minVal)
+  .map(x => x.i);
+
+// If tie: list them (you can tighten later with a +/- threshold rule)
+const primaryNames = minIdxs.map(i => indices[i].name).join(" + ");
+
+// Build message
+const primaryTitleEl = $("primary-constraint-title");
+const primaryDescEl  = $("primary-constraint-desc");
+
+primaryTitleEl.textContent = primaryNames;
+
+if (minIdxs.length === 1) {
+  const i = minIdxs[0];
+  primaryDescEl.innerHTML = `
+    This is the lowest score and the <b>main bottleneck</b>. Even if other areas are strong, this one tends to
+    suppress visible social outcomes until it’s trained.
+    <br><br>
+    <span style="color:#b7faff;"><b>What it controls:</b> ${indices[i].desc}</span>
+  `;
+} else {
+  primaryDescEl.innerHTML = `
+    You have a <b>shared bottleneck</b>. When two areas tie for lowest, the system treats them as a paired constraint:
+    improving only one usually doesn’t fully unlock results until both rise.
+    <br><br>
+    <span style="color:#b7faff;"><b>What it controls:</b> ${minIdxs.map(i => indices[i].desc).join(" / ")}</span>
+  `;
+}
+
         // Swap views
         $("diagnostic-section").style.display = "none";
         const results = $("results-section");
