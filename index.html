@@ -542,6 +542,11 @@
         // Percent scores (max per index = 25)
         const percents = totals.map((sum) => Math.round((sum / 25) * 100));
 
+        // --- Composite Pattern ---
+const pattern = pickCompositePattern(percents);
+$("composite-pattern-title").textContent = pattern.name;
+$("composite-pattern-desc").textContent  = pattern.desc;
+
         // --- Primary Constraint (lowest index) ---
 const minVal = Math.min(...percents);
 const minIdxs = percents
