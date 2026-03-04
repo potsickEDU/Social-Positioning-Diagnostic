@@ -587,30 +587,63 @@
     }
 
     function emailResults() {
-  const parentEmail = $("parentEmail").value.trim();
+  const parentEmailEl = $("parentEmail");
+  const parentEmail = (parentEmailEl?.value || "").trim();
 
   if (!parentEmail) {
     showError("Please enter a parent email at the top before emailing results.");
-    $("parentEmail").scrollIntoView({ behavior: "smooth", block: "center" });
-    $("parentEmail").focus();
+    parentEmailEl.scrollIntoView({ behavior: "smooth", block: "center" });
+    parentEmailEl.focus();
     return;
   }
 
-  const subject = encodeURIComponent("Confidence Lab™ — Diagnostic Results");
-
-  const resultsText =
+  // FULL report (can be very long)
+  const fullReport =
     "Parent Email: " + parentEmail + "\n\n" +
     buildResultsText();
 
-  const body = encodeURIComponent(resultsText);
+  // Always try to copy the full report first (so we never lose it)
+  const copyPromise = (navigator.clipboard && navigator.clipboard.writeText)
+    ? navigator.clipboard.writeText(fullReport)
+    : Promise.reject(new Error("Clipboard API not available"));
 
-  const mailtoLink = `mailto:${DESTINATION_EMAIL}?subject=${subject}&body=${body}`;
+  copyPromise
+    .catch(() => {
+      // Fallback for older browsers
+      try {
+        const ta = document.createElement("textarea");
+        ta.value = fullReport;
+        ta.setAttribute("readonly", "");
+        ta.style.position = "fixed";
+        ta.style.left = "-9999px";
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand("copy");
+        document.body.removeChild(ta);
+      } catch (e) {
+        // If even fallback fails, do nothing — user can still use the Copy Results button
+      }
+    })
+    .finally(() => {
+      // SHORT email body to avoid mailto length limits
+      const subject = encodeURIComponent("Confidence Lab™ — Diagnostic Results");
+      const shortBody = encodeURIComponent(
+        "Parent Email: " + parentEmail + "\n\n" +
+        "✅ The full diagnostic report has been copied to your clipboard.\n" +
+        "Paste it into this email and hit send.\n\n" +
+        "(If nothing copied, click the on-page “Copy Results” button.)"
+      );
 
-  const link = document.createElement("a");
-  link.href = mailtoLink;
-  document.body.appendChild(link);
-  link.click();
-  document.body.removeChild(link);
+      const mailtoLink = `mailto:${DESTINATION_EMAIL}?subject=${subject}&body=${shortBody}`;
+
+      // More reliable launch than window.location.href in some environments
+      const a = document.createElement("a");
+      a.href = mailtoLink;
+      a.style.display = "none";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    });
 }
 
     // Make functions available to onclick=""
