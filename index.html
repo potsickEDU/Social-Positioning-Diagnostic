@@ -587,20 +587,31 @@
     }
 
     function emailResults() {
-      const parentEmail = $("parentEmail").value.trim();
-      if (!parentEmail) {
-        showError("Please enter a parent email at the top before emailing results.");
-        $("parentEmail").scrollIntoView({ behavior: "smooth", block: "center" });
-        $("parentEmail").focus();
-        return;
-      }
+  const parentEmail = $("parentEmail").value.trim();
 
-      const subject = encodeURIComponent("Confidence Lab™ — Diagnostic Results");
-      const body = encodeURIComponent(buildResultsText());
+  if (!parentEmail) {
+    showError("Please enter a parent email at the top before emailing results.");
+    $("parentEmail").scrollIntoView({ behavior: "smooth", block: "center" });
+    $("parentEmail").focus();
+    return;
+  }
 
-      // mailto does not attach files; it pre-fills the user's email client.
-      window.location.href = `mailto:${DESTINATION_EMAIL}?subject=${subject}&body=${body}`;
-    }
+  const subject = encodeURIComponent("Confidence Lab™ — Diagnostic Results");
+
+  const resultsText =
+    "Parent Email: " + parentEmail + "\n\n" +
+    buildResultsText();
+
+  const body = encodeURIComponent(resultsText);
+
+  const mailtoLink = `mailto:${DESTINATION_EMAIL}?subject=${subject}&body=${body}`;
+
+  const link = document.createElement("a");
+  link.href = mailtoLink;
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+}
 
     // Make functions available to onclick=""
     window.copyResults = copyResults;
