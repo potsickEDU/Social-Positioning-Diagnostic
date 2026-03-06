@@ -1089,7 +1089,7 @@ const profileHTML = `
 
 $("explanation").insertAdjacentHTML("beforeend", profileHTML);
         
-const profileHTML = `
+const reportExtras = `
   <div style="
     margin-bottom:18px;
     padding:18px;
@@ -1114,11 +1114,7 @@ const profileHTML = `
       ${compositePattern}
     </div>
   </div>
-`;
 
-$("explanation").insertAdjacentHTML("beforeend", profileHTML);
-        
-const trajectoryHTML = `
   <div class="micro-plan" style="margin-top:14px;">
     <div style="font-weight:900; color: var(--electric-blue); margin-bottom:6px;">
       Trajectory Signal
@@ -1132,13 +1128,13 @@ const trajectoryHTML = `
       but hesitation when timing, pressure, or group dynamics change.
     </div>
     <div style="margin-top:10px;">
-      The encouraging part is that these behaviors respond extremely well
-      to structured training and repeated real-world reps.
+      These behaviors respond extremely well to structured training
+      and repeated real-world reps.
     </div>
   </div>
 `;
 
-$("explanation").insertAdjacentHTML("beforeend", trajectoryHTML);
+$("explanation").insertAdjacentHTML("beforeend", reportExtras);
         
         // NEW: Auto-capture to Sheet
         // Store both raw + percent + pattern + constraint + timestamp
