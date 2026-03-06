@@ -1060,6 +1060,28 @@
           </div>
         `;
 
+const trajectoryHTML = `
+  <div class="micro-plan" style="margin-top:14px;">
+    <div style="font-weight:900; color: var(--electric-blue); margin-bottom:6px;">
+      Trajectory Signal
+    </div>
+    <div>
+      Your teen’s results suggest that their social positioning skills are developing,
+      but uneven across key areas.
+    </div>
+    <div style="margin-top:10px;">
+      Many capable teens show this pattern — strong ability in some situations,
+      but hesitation when timing, pressure, or group dynamics change.
+    </div>
+    <div style="margin-top:10px;">
+      The encouraging part is that these behaviors respond extremely well
+      to structured training and repeated real-world reps.
+    </div>
+  </div>
+`;
+
+$("explanation").insertAdjacentHTML("beforeend", trajectoryHTML);
+        
         // NEW: Auto-capture to Sheet
         // Store both raw + percent + pattern + constraint + timestamp
         saveResultsToSheet({
