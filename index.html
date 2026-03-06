@@ -1028,20 +1028,25 @@
         const strongestIdx = totalsRaw.map((v,i)=>({v,i})).sort((a,b)=>b.v-a.v)[0].i;
         const weakestIdx = minIdxs[0];
 
-        $("explanation").innerHTML = `
+$("explanation").innerHTML = `
   <div class="micro-plan">
-    <div style="font-weight:900; color: var(--electric-blue); margin-bottom:6px;">How to Read This Report</div>
+    <div style="font-weight:900; color: var(--electric-blue); margin-bottom:6px;">
+      How to Read This Report
+    </div>
+
     <div>
       This is a <b>behavioral signal readout</b>, not a personality label.
       You’re looking for the <b>constraint</b> because that is what suppresses visible outcomes in groups.
     </div>
+
     <div style="margin-top:10px;">
       <b>Strongest signal:</b> ${indices[strongestIdx].name} (${indices[strongestIdx].short})<br>
       <b>Primary constraint:</b> ${indices[weakestIdx].name} (${indices[weakestIdx].short})
     </div>
+
     <div style="margin-top:10px;">
-      When <b>${indices[weakestIdx].short}</b> rises, the strongest signal stops being “hidden” and starts converting into:
-      being included, being listened to, being chosen, and having social momentum.
+      When <b>${indices[weakestIdx].short}</b> rises, the strongest signal stops being hidden and begins converting into:
+      being included, being listened to, being chosen, and gaining social momentum.
     </div>
   </div>
 
@@ -1049,28 +1054,22 @@
     ${indices.map((ind, idx) => {
       const raw = totalsRaw[idx];
       const z = zoneFromRaw(raw);
+
       return `
         <div class="card" style="margin: 10px 0 0 0;">
           <div class="kicker">${ind.name} (${ind.short})</div>
-          <div class="headline">${raw}/25 <span style="font-size:0.92rem; color:${z.color};">— ${z.label}</span></div>
+          <div class="headline">
+            ${raw}/25
+            <span style="font-size:0.92rem; color:${z.color};">
+              — ${z.label}
+            </span>
+          </div>
           <div class="body">${ind.desc}</div>
         </div>
       `;
     }).join("")}
   </div>
 `;
-
-// NEW: Auto-capture to Sheet
-// Store both raw + percent + pattern + constraint + timestamp
-saveResultsToSheet({
-  createdAtISO: new Date().toISOString(),
-  parentEmail: parentEmail,
-  scoresRaw: {
-    ESI: totalsRaw[0],
-    FCI: totalsRaw[1],
-    ASI: totalsRaw[2],
-    SRI: totalsRaw[3],
-  },
         
         // NEW: Auto-capture to Sheet
         // Store both raw + percent + pattern + constraint + timestamp
