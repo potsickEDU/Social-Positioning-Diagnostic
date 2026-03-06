@@ -1029,112 +1029,48 @@
         const weakestIdx = minIdxs[0];
 
         $("explanation").innerHTML = `
-          <div class="micro-plan">
-            <div style="font-weight:900; color: var(--electric-blue); margin-bottom:6px;">How to Read This Report</div>
-            <div>
-              This is a <b>behavioral signal readout</b>, not a personality label.
-              You’re looking for the <b>constraint</b> because that is what suppresses visible outcomes in groups.
-            </div>
-            <div style="margin-top:10px;">
-              <b>Strongest signal:</b> ${indices[strongestIdx].name} (${indices[strongestIdx].short})<br>
-              <b>Primary constraint:</b> ${indices[weakestIdx].name} (${indices[weakestIdx].short})
-            </div>
-            <div style="margin-top:10px;">
-              When <b>${indices[weakestIdx].short}</b> rises, the strongest signal stops being “hidden” and starts converting into:
-              being included, being listened to, being chosen, and having social momentum.
-            </div>
-          </div>
-
-          <div style="margin-top:12px;">
-            ${indices.map((ind, idx) => {
-              const raw = totalsRaw[idx];
-              const z = zoneFromRaw(raw);
-              return `
-                <div class="card" style="margin: 10px 0 0 0;">
-                  <div class="kicker">${ind.name} (${ind.short})</div>
-                  <div class="headline">${raw}/25 <span style="font-size:0.92rem; color:${z.color};">— ${z.label}</span></div>
-                  <div class="body">${ind.desc}</div>
-                </div>
-              `;
-            }).join("")}
-          </div>
-        `;
-
-const profileHTML = `
-  <div style="
-    margin-bottom:18px;
-    padding:18px;
-    border:1px solid #2a2a2a;
-    border-radius:10px;
-    background:#0f0f0f;
-  ">
-    <div style="
-      font-size:12px;
-      letter-spacing:2px;
-      color:#8a8a8a;
-      margin-bottom:6px;
-    ">
-      SOCIAL POSITIONING PROFILE
-    </div>
-
-    <div style="
-      font-size:28px;
-      font-weight:800;
-      color:#ffffff;
-    ">
-      ${compositePattern}
-    </div>
-  </div>
-`;
-
-$("explanation").insertAdjacentHTML("beforeend", profileHTML);
-        
-const reportExtras = `
-  <div style="
-    margin-bottom:18px;
-    padding:18px;
-    border:1px solid #2a2a2a;
-    border-radius:10px;
-    background:#0f0f0f;
-  ">
-    <div style="
-      font-size:12px;
-      letter-spacing:2px;
-      color:#8a8a8a;
-      margin-bottom:6px;
-    ">
-      SOCIAL POSITIONING PROFILE
-    </div>
-
-    <div style="
-      font-size:28px;
-      font-weight:800;
-      color:#ffffff;
-    ">
-      ${compositePattern}
-    </div>
-  </div>
-
-  <div class="micro-plan" style="margin-top:14px;">
-    <div style="font-weight:900; color: var(--electric-blue); margin-bottom:6px;">
-      Trajectory Signal
-    </div>
+  <div class="micro-plan">
+    <div style="font-weight:900; color: var(--electric-blue); margin-bottom:6px;">How to Read This Report</div>
     <div>
-      Your teen’s results suggest that their social positioning skills are developing,
-      but uneven across key areas.
+      This is a <b>behavioral signal readout</b>, not a personality label.
+      You’re looking for the <b>constraint</b> because that is what suppresses visible outcomes in groups.
     </div>
     <div style="margin-top:10px;">
-      Many capable teens show this pattern — strong ability in some situations,
-      but hesitation when timing, pressure, or group dynamics change.
+      <b>Strongest signal:</b> ${indices[strongestIdx].name} (${indices[strongestIdx].short})<br>
+      <b>Primary constraint:</b> ${indices[weakestIdx].name} (${indices[weakestIdx].short})
     </div>
     <div style="margin-top:10px;">
-      These behaviors respond extremely well to structured training
-      and repeated real-world reps.
+      When <b>${indices[weakestIdx].short}</b> rises, the strongest signal stops being “hidden” and starts converting into:
+      being included, being listened to, being chosen, and having social momentum.
     </div>
+  </div>
+
+  <div style="margin-top:12px;">
+    ${indices.map((ind, idx) => {
+      const raw = totalsRaw[idx];
+      const z = zoneFromRaw(raw);
+      return `
+        <div class="card" style="margin: 10px 0 0 0;">
+          <div class="kicker">${ind.name} (${ind.short})</div>
+          <div class="headline">${raw}/25 <span style="font-size:0.92rem; color:${z.color};">— ${z.label}</span></div>
+          <div class="body">${ind.desc}</div>
+        </div>
+      `;
+    }).join("")}
   </div>
 `;
 
-$("explanation").insertAdjacentHTML("beforeend", reportExtras);
+// NEW: Auto-capture to Sheet
+// Store both raw + percent + pattern + constraint + timestamp
+saveResultsToSheet({
+  createdAtISO: new Date().toISOString(),
+  parentEmail: parentEmail,
+  scoresRaw: {
+    ESI: totalsRaw[0],
+    FCI: totalsRaw[1],
+    ASI: totalsRaw[2],
+    SRI: totalsRaw[3],
+  },
         
         // NEW: Auto-capture to Sheet
         // Store both raw + percent + pattern + constraint + timestamp
