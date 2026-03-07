@@ -34,6 +34,11 @@
       --panel-border:#29f7ff44;
     }
 
+html{
+  overflow-x:hidden;
+  max-width:100%;
+}
+    
 html {
   max-width: 100%;
   overflow-x: hidden;
@@ -74,9 +79,11 @@ overflow-x: hidden;
     }
 
     .card{
-  width:95%;
+  width:100%;
+  max-width:95%;
   margin:10px auto 14px auto;
-  padding:14px 14px;
+  padding:14px;
+  box-sizing:border-box;
   border-radius:12px;
   border:1px solid var(--panel-border);
   background:var(--panel);
@@ -581,6 +588,9 @@ background:rgba(255,255,255,0.05);
 font-size:15px;
 line-height:1.6;
 color:#b7faff;
+box-sizing:border-box;
+width:100%;
+max-width:100%;
 ">
 
 <b>Why this matters:</b><br><br>
