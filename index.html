@@ -34,11 +34,7 @@
       --panel-border:#29f7ff44;
     }
 
-html{
-  overflow-x:hidden;
-  max-width:100%;
-}
-    
+  
 html {
   max-width: 100%;
   overflow-x: hidden;
@@ -112,13 +108,15 @@ overflow-x: hidden;
     }
 
     .question-block{
-      margin:18px auto 22px auto;
-      width:95%;
-      border:1px solid rgba(41,247,255,0.30);
-      border-radius:12px;
-      padding:14px 14px;
-      background:rgba(0,0,0,0.22);
-    }
+  margin:18px auto 22px auto;
+  width:100%;
+  max-width:95%;
+  box-sizing:border-box;
+  border:1px solid rgba(41,247,255,0.30);
+  border-radius:12px;
+  padding:14px;
+  background:rgba(0,0,0,0.22);
+}
 
     .question-block h3{
       margin:0 0 6px 0;
@@ -357,11 +355,15 @@ overflow-x: hidden;
     .score-explanation b{ color:var(--electric-blue); }
 
     @media (max-width:560px){
-      .score-row{ flex-direction:column; align-items:stretch; }
-      .score-row .label, .score-row .val{ min-width:auto; text-align:left; }
-      button{ width:100%; }
-      .card, .question-block, .results, .error-banner{ width:100%; }
-    }
+  .score-row{ flex-direction:column; align-items:stretch; }
+  .score-row .label, .score-row .val{ min-width:auto; text-align:left; }
+  button{ width:100%; }
+  .card, .question-block, .results, .error-banner, .radar-box, .cta, .next-step-box{
+    width:100%;
+    max-width:100%;
+    box-sizing:border-box;
+  }
+}
 
     /* --- Results CTA spacing control --- */
     .email-instructions{
@@ -441,8 +443,11 @@ overflow-x: hidden;
     }
 
 .next-step-box{
-  margin-top:40px;
+  width:100%;
+  max-width:95%;
+  margin:40px auto 0 auto;
   padding:30px;
+  box-sizing:border-box;
   border-radius:12px;
   background:#0d1117;
   border:1px solid #1f6feb;
