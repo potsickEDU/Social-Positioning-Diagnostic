@@ -564,63 +564,14 @@ Apply for Confidence Lab™ Coaching
         <div class="micro-plan" id="primary-constraint-plan" style="display:none;"></div>
       </div>
 
-      const radarCanvas = document.getElementById("radarChart");
+      <div id="primary-constraint-plan"></div>
 
-if (radarCanvas && typeof Chart !== "undefined") {
-  if (window.radarChartInstance) {
-    window.radarChartInstance.destroy();
-  }
+<div class="radar-box">
+  <h2>Signal Map</h2>
+  <canvas id="radarChart"></canvas>
+</div>
 
-  window.radarChartInstance = new Chart(radarCanvas, {
-    type: "radar",
-    data: {
-      labels: [
-        "Entry Speed",
-        "Friction Control",
-        "Authority Signal",
-        "Selection Readiness"
-      ],
-      datasets: [{
-        data: [ESI, FCI, ASI, SRI],
-        backgroundColor: "rgba(41,247,255,.18)",
-        borderColor: "#29f7ff",
-        borderWidth: 2,
-        pointBackgroundColor: "#29f7ff",
-        pointBorderColor: "#29f7ff",
-        pointRadius: 4
-      }]
-    },
-    options: {
-      plugins: {
-        legend: { display: false }
-      },
-      scales: {
-        r: {
-          min: 0,
-          max: 25,
-          ticks: {
-            stepSize: 5,
-            backdropColor: "transparent",
-            color: "#9fb0c8"
-          },
-          angleLines: {
-            color: "rgba(255,255,255,.12)"
-          },
-          grid: {
-            color: "rgba(255,255,255,.12)"
-          },
-          pointLabels: {
-            color: "#eaf2ff",
-            font: {
-              size: 14
-            }
-          }
-        }
-      }
-    }
-  });
-}
-
+     
       <div class="score-explanation" id="explanation"></div>
 
       <div class="cta">
@@ -1148,6 +1099,50 @@ if(message){
   "Based on this diagnostic, the fastest improvement will come from strengthening <b>" 
   + primaryNames +
   "</b>.";
+}
+        const radarCanvas = document.getElementById("radarChart");
+
+if (radarCanvas && typeof Chart !== "undefined") {
+
+  if (window.radarChartInstance) {
+    window.radarChartInstance.destroy();
+  }
+
+  window.radarChartInstance = new Chart(radarCanvas, {
+    type: "radar",
+    data: {
+      labels: [
+        "Entry Speed",
+        "Friction Control",
+        "Authority Signal",
+        "Selection Readiness"
+      ],
+      datasets: [{
+        data: [ESI, FCI, ASI, SRI],
+        backgroundColor: "rgba(41,247,255,.18)",
+        borderColor: "#29f7ff",
+        borderWidth: 2,
+        pointBackgroundColor: "#29f7ff",
+        pointRadius: 4
+      }]
+    },
+    options: {
+      plugins: {
+        legend: { display: false }
+      },
+      scales: {
+        r: {
+          min: 0,
+          max: 25,
+          ticks: {
+            stepSize: 5,
+            backdropColor: "transparent"
+          }
+        }
+      }
+    }
+  });
+
 }
 
         if (minIdxs.length === 1) {
