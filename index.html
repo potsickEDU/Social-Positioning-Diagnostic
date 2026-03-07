@@ -1095,7 +1095,7 @@ if(message){
   + primaryNames +
   "</b>.";
 }
-        const radarCanvas = document.getElementById("radarChart");
+       const radarCanvas = document.getElementById("radarChart");
 
 if (radarCanvas && typeof Chart !== "undefined") {
 
@@ -1117,45 +1117,46 @@ if (radarCanvas && typeof Chart !== "undefined") {
         backgroundColor: "rgba(41,247,255,.18)",
         borderColor: "#29f7ff",
         borderWidth: 3,
-        pointBackgroundColor: "rgba(41,247,255,.22)",
-        pointHoverRadius: 7,
-        pointRadius: 5
+        pointBackgroundColor: "#29f7ff",
+        pointRadius: 5,
+        pointHoverRadius: 7
       }]
     },
-   options: {
-  plugins: {
-    legend: { display: false }
-  },
-  scales: {
-    r: {
-      min: 0,
-      max: 25,
-      angleLines: {
-        color: "rgba(255,255,255,0.18)"
+    options: {
+      plugins: {
+        legend: { display: false }
       },
-      grid: {
-        color: "rgba(255,255,255,0.18)"
-      },
-      pointLabels: {
-        color: "#b7faff",
-        font: {
-          size: 14,
-          weight: "700"
-        }
-      },
-      ticks: {
-        stepSize: 5,
-        color: "#ffffff",
-        backdropColor: "transparent",
-        showLabelBackdrop: false,
-        font: {
-          size: 12,
-          weight: "700"
+      scales: {
+        r: {
+          min: 0,
+          max: 25,
+          angleLines: {
+            color: "rgba(255,255,255,0.18)"
+          },
+          grid: {
+            color: "rgba(255,255,255,0.18)"
+          },
+          pointLabels: {
+            color: "#b7faff",
+            font: {
+              size: 14,
+              weight: "700"
+            }
+          },
+          ticks: {
+            stepSize: 5,
+            color: "#ffffff",
+            backdropColor: "transparent",
+            showLabelBackdrop: false,
+            font: {
+              size: 12,
+              weight: "700"
+            }
+          }
         }
       }
     }
-  }
-});
+  });
 
 }
 
