@@ -673,11 +673,11 @@ Apply for Confidence Lab™ Coaching
     }
 
     function zoneFromRaw(raw) {
-      if (raw >= 20) return { label: "Strong Signal Zone", color: "var(--hud-green)" };
-      if (raw >= 15) return { label: "Developing Signal Zone", color: "var(--electric-blue)" };
-      if (raw >= 10) return { label: "Hesitation Threshold", color: "var(--warn)" };
-      return { label: "Suppressed Execution", color: "var(--danger)" };
-    }
+  if (raw >= 20) return { label: "Strong Signal Zone", color: "var(--hud-green)" };
+  if (raw >= 15) return { label: "Developing Signal Zone", color: "#ffd84d" };
+  if (raw >= 10) return { label: "Hesitation Threshold", color: "var(--warn)" };
+  return { label: "Suppressed Execution", color: "var(--danger)" };
+}
 
     function pctFromRaw(raw) {
       return Math.round((raw / 25) * 100);
