@@ -1126,17 +1126,36 @@ if (radarCanvas && typeof Chart !== "undefined") {
         legend: { display: false }
       },
       scales: {
-        r: {
-          min: 0,
-          max: 25,
-          ticks: {
-            stepSize: 5,
-            backdropColor: "transparent"
-          }
-        }
+  r: {
+    min: 0,
+    max: 25,
+    angleLines: {
+      color: "rgba(255,255,255,0.18)"
+    },
+    grid: {
+      color: "rgba(255,255,255,0.18)"
+    },
+    pointLabels: {
+      color: "#b7faff",
+      font: {
+        size: 14,
+        weight: "700"
       }
-    }
-  });
+    },
+    ticks: {
+      stepSize: 5,
+      color: "#ffffff",
+      backdropColor: "transparent",
+      font: {
+        size: 12,
+        weight: "700"
+      },
+      showLabelBackdrop: false
+     }
+  }
+}
+  }
+});
 
 }
 
