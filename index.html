@@ -565,6 +565,74 @@ Apply for Confidence Lab™ Coaching
         <div class="micro-plan" id="primary-constraint-plan" style="display:none;"></div>
       </div>
 
+      const radarCanvas = document.getElementById("radarChart");
+
+if (radarCanvas) {
+  if (window.radarChartInstance) {
+    window.radarChartInstance.destroy();
+  }
+
+  window.radarChartInstance = new Chart(radarCanvas, {
+    type: "radar",
+    data: {
+      labels: [
+        "Entry Speed",
+        "Friction Control",
+        "Authority Signal",
+        "Selection Readiness"
+      ],
+      datasets: [{
+        label: "Score",
+        data: [
+          indices[0].score,
+          indices[1].score,
+          indices[2].score,
+          indices[3].score
+        ],
+        fill: true,
+        backgroundColor: "rgba(41, 247, 255, 0.18)",
+        borderColor: "#29f7ff",
+        borderWidth: 2,
+        pointBackgroundColor: "#29f7ff",
+        pointBorderColor: "#29f7ff",
+        pointRadius: 4
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: true,
+      scales: {
+        r: {
+          min: 0,
+          max: 25,
+          ticks: {
+            stepSize: 5,
+            color: "#9fb0c8",
+            backdropColor: "transparent"
+          },
+          angleLines: {
+            color: "rgba(255,255,255,.12)"
+          },
+          grid: {
+            color: "rgba(255,255,255,.12)"
+          },
+          pointLabels: {
+            color: "#eaf2ff",
+            font: {
+              size: 14
+            }
+          }
+        }
+      },
+      plugins: {
+        legend: {
+          display: false
+        }
+      }
+    }
+  });
+}
+
       <div class="score-explanation" id="explanation"></div>
 
       <div class="cta">
