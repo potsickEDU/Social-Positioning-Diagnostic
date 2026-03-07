@@ -1085,6 +1085,8 @@ Apply for Confidence Lab™ Coaching
         const primaryDescEl = $("primary-constraint-desc");
         const primaryPlanEl = $("primary-constraint-plan");
 
+        resultsEl.style.display = "block";
+
         const message = document.getElementById("constraint-message");
 
 if(message){
@@ -1137,6 +1139,8 @@ if (radarCanvas && typeof Chart !== "undefined") {
   });
 
 }
+
+        resultsEl.scrollIntoView({ behavior: "smooth" });
 
         if (minIdxs.length === 1) {
           const i = minIdxs[0];
@@ -1269,8 +1273,8 @@ $("explanation").innerHTML = `
           userAgent: navigator.userAgent
         });
 
-        resultsEl.style.display = "block";
-        resultsEl.scrollIntoView({ behavior: "smooth" });
+        
+        
       });
     });
   </script>
