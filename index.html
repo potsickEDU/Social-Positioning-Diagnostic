@@ -498,6 +498,8 @@
 
 <h2>Next Step</h2>
 
+<p id="constraint-message"></p>        
+
 <p>
 Your teen’s results show a clear training opportunity.
 The fastest improvements happen when the <b>Primary Constraint</b> is trained directly with structured reps.
@@ -1056,6 +1058,15 @@ Apply for Confidence Lab™ Coaching
 
         const primaryDescEl = $("primary-constraint-desc");
         const primaryPlanEl = $("primary-constraint-plan");
+
+        const message = document.getElementById("constraint-message");
+
+if(message){
+  message.innerHTML =
+  "Based on this diagnostic, the fastest improvement will come from strengthening <b>" 
+  + primaryNames +
+  "</b>.";
+}
 
         if (minIdxs.length === 1) {
           const i = minIdxs[0];
