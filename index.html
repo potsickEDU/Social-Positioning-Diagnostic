@@ -566,7 +566,7 @@ Apply for Confidence Lab™ Coaching
 
       const radarCanvas = document.getElementById("radarChart");
 
-if (radarCanvas) {
+if (radarCanvas && typeof Chart !== "undefined") {
   if (window.radarChartInstance) {
     window.radarChartInstance.destroy();
   }
@@ -581,15 +581,8 @@ if (radarCanvas) {
         "Selection Readiness"
       ],
       datasets: [{
-        label: "Score",
-        data: [
-          indices[0].score,
-          indices[1].score,
-          indices[2].score,
-          indices[3].score
-        ],
-        fill: true,
-        backgroundColor: "rgba(41, 247, 255, 0.18)",
+        data: [ESI, FCI, ASI, SRI],
+        backgroundColor: "rgba(41,247,255,.18)",
         borderColor: "#29f7ff",
         borderWidth: 2,
         pointBackgroundColor: "#29f7ff",
@@ -598,16 +591,17 @@ if (radarCanvas) {
       }]
     },
     options: {
-      responsive: true,
-      maintainAspectRatio: true,
+      plugins: {
+        legend: { display: false }
+      },
       scales: {
         r: {
           min: 0,
           max: 25,
           ticks: {
             stepSize: 5,
-            color: "#9fb0c8",
-            backdropColor: "transparent"
+            backdropColor: "transparent",
+            color: "#9fb0c8"
           },
           angleLines: {
             color: "rgba(255,255,255,.12)"
@@ -621,11 +615,6 @@ if (radarCanvas) {
               size: 14
             }
           }
-        }
-      },
-      plugins: {
-        legend: {
-          display: false
         }
       }
     }
