@@ -1139,7 +1139,7 @@ if (radarCanvas && typeof Chart !== "undefined") {
   "Entry Speed",
   ["Friction", "Control"],
   "Authority Signal",
-  ["Selection", "Readiness"]
+  "Selection Readiness"
 ],
       datasets: [{
         data: totalsRaw,
@@ -1155,13 +1155,13 @@ if (radarCanvas && typeof Chart !== "undefined") {
   responsive: true,
   maintainAspectRatio: false,
   layout: {
-    padding: {
-      top: 30,
-      right: 30,
-      bottom: 30,
-      left: 30
-    }
-  },
+  padding: {
+    top: 10,
+    right: 10,
+    bottom: 10,
+    left: 10
+  }
+},
   plugins: {
     legend: { display: false }
   },
@@ -1176,14 +1176,13 @@ if (radarCanvas && typeof Chart !== "undefined") {
         color: "rgba(255,255,255,0.25)"
       },
       pointLabels: {
-        color: "#b7faff",
-        centerPointLabels: true,
-        padding: 12,
-        font: {
-          size: 15,
-          weight: "700"
-        }
-      },
+  color: "#b7faff",
+  padding: 6,
+  font: {
+    size: 13,
+    weight: "700"
+  }
+},
       ticks: {
         stepSize: 5,
         color: "#ffffff",
