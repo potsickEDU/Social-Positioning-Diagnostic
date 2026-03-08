@@ -553,18 +553,13 @@ html {
   <canvas id="radarChart"></canvas>
 </div>
 
-<div style="
+<div id="profile-summary" style="
   margin-top:12px;
   font-size:15px;
   color:#b7faff;
   text-align:center;
   line-height:1.5;
-">
-Many capable teens who take this diagnostic fall into the
-"Under-Conditioned Operator" category — meaning their ability
-is present but the behavioral signals that communicate
-confidence in groups are not yet fully trained.
-</div>
+"></div>
 
      <div class="card" style="margin-top:16px;">
   <div class="kicker">Parent Insight</div>
@@ -1148,7 +1143,7 @@ if (radarCanvas && typeof Chart !== "undefined") {
 ],
       datasets: [{
         data: totalsRaw,
-        backgroundColor: "rgba(41,247,255,.18)",
+        backgroundColor: "rgba(41,247,255,.12)",
         borderColor: "#29f7ff",
         borderWidth: 3,
         pointBackgroundColor: "rgba(41,247,255,.25)",
