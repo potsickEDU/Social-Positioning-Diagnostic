@@ -472,15 +472,16 @@ html {
   background:#2ea043;
 }
 
-    .radar-box{
+   .radar-box{
   width:100%;
-  max-width:95%;
+  max-width:100%;
   margin:28px auto 0 auto;
-  padding:24px;
+  padding:24px 12px 28px;
   box-sizing:border-box;
   border-radius:16px;
   background: rgba(255,255,255,.03);
   border:1px solid rgba(255,255,255,.08);
+  overflow:hidden;
 }
 
 .radar-box h2{
@@ -488,11 +489,21 @@ html {
   text-align: center;
 }
 
-#radarChart {
-  display: block;
-  width: 100% !important;
-  max-width: 100%;
-  height: auto !important;
+#radarChart{
+  display:block;
+  width:100% !important;
+  height:460px !important;
+  max-width:100%;
+}
+
+@media (max-width: 768px){
+  .radar-box{
+    padding:20px 8px 24px;
+  }
+
+  #radarChart{
+    height:460px !important;
+  }
 }
     
   </style>
@@ -1130,11 +1141,11 @@ if (radarCanvas && typeof Chart !== "undefined") {
     type: "radar",
     data: {
       labels: [
-        "Entry Speed",
-        "Friction Control",
-        "Authority Signal",
-        "Selection Readiness"
-      ],
+  "Entry Speed",
+  ["Friction", "Control"],
+  "Authority Signal",
+  ["Selection", "Readiness"]
+],
       datasets: [{
         data: totalsRaw,
         backgroundColor: "rgba(41,247,255,.18)",
@@ -1146,45 +1157,51 @@ if (radarCanvas && typeof Chart !== "undefined") {
       }]
     },
     options: {
+  responsive: true,
+  maintainAspectRatio: false,
   layout: {
-    padding: 30
+    padding: {
+      top: 30,
+      right: 30,
+      bottom: 30,
+      left: 30
+    }
   },
-      plugins: {
-        legend: { display: false }
+  plugins: {
+    legend: { display: false }
+  },
+  scales: {
+    r: {
+      min: 0,
+      max: 25,
+      angleLines: {
+        color: "rgba(255,255,255,0.25)"
       },
-      scales: {
-        r: {
-          min: 0,
-          max: 25,
-          angleLines: {
-  color: "rgba(255,255,255,0.35)",
-  lineWidth: 1.5
-},
-grid: {
-  color: "rgba(255,255,255,0.30)",
-  lineWidth: 1.3
-},
-          pointLabels: {
-            color: "#b7faff",
-            font: {
-              size: 14,
-              weight: "700"
-            }
-          },
-          ticks: {
-  stepSize: 5,
-  padding: 10,
-  color: "#ffffff",
-  backdropColor: "transparent",
-  showLabelBackdrop: false,
-            font: {
-              size: 12,
-              weight: "700"
-            }
-          }
+      grid: {
+        color: "rgba(255,255,255,0.25)"
+      },
+      pointLabels: {
+        color: "#b7faff",
+        centerPointLabels: true,
+        padding: 12,
+        font: {
+          size: 15,
+          weight: "700"
+        }
+      },
+      ticks: {
+        stepSize: 5,
+        color: "#ffffff",
+        backdropColor: "transparent",
+        showLabelBackdrop: false,
+        font: {
+          size: 12,
+          weight: "700"
         }
       }
     }
+  }
+}
   });
 
 }
