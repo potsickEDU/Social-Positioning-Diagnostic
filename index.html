@@ -1135,11 +1135,11 @@ if (radarCanvas && typeof Chart !== "undefined") {
   window.radarChartInstance = new Chart(radarCanvas, {
     type: "radar",
     data: {
-      labels: [
+     labels: [
   "Entry Speed",
   ["Friction", "Control"],
   "Authority Signal",
-  "Selection Readiness"
+  ["Selection", "Readiness"]
 ],
       datasets: [{
         data: totalsRaw,
