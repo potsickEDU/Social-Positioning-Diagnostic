@@ -661,11 +661,11 @@ Apply for Confidence Lab™ Coaching
     // DATA
     // =========================
     const indices = [
-      { name: "Entry Speed Index (ESI)", short: "ESI", desc: "How quickly and fluidly the teen initiates social connections and enters group situations." },
-      { name: "Friction Control Index (FCI)", short: "FCI", desc: "How effectively the teen recovers from awkwardness, pressure, or missteps and stays composed." },
-      { name: "Authority Signal Index (ASI)", short: "ASI", desc: "How strongly the teen projects presence, credibility, and leadership signal in groups." },
-      { name: "Selection Readiness Index (SRI)", short: "SRI", desc: "How reliably the teen converts presence into invites, inclusion, and being chosen." },
-    ];
+  { name: "Entry Speed Index (ESI)", short: "ESI", desc: "How quickly the teen joins conversations and enters group situations." },
+  { name: "Composure Under Pressure Index (CPI)", short: "CPI", desc: "How well the teen stays steady when challenged, questioned, or under social pressure." },
+  { name: "Leadership Presence Index (LPI)", short: "LPI", desc: "How strongly the teen projects confidence and leadership presence in groups." },
+  { name: "Opportunity Readiness Index (ORI)", short: "ORI", desc: "How often the teen steps forward when opportunities appear in social or group settings." },
+];
 
     const questionsByIndex = [
       {
@@ -681,8 +681,9 @@ Apply for Confidence Lab™ Coaching
         ],
       },
       {
-        indexShort: "FCI",
-        title: "Friction Control",
+        {
+  indexShort: "CPI",
+  title: "Composure Under Pressure",
         blurb: "How well they handle awkwardness, pressure, teasing, and social bumps in real time.",
         questions: [
           "If a moment gets awkward, I recover without spiraling.",
@@ -693,8 +694,9 @@ Apply for Confidence Lab™ Coaching
         ],
       },
       {
-        indexShort: "ASI",
-        title: "Authority Signal",
+        {
+  indexShort: "LPI",
+  title: "Leadership Presence",
         blurb: "How clearly they project presence (voice, eye contact, decisiveness) so others register them.",
         questions: [
           "People tend to listen when I speak in a group.",
@@ -705,8 +707,9 @@ Apply for Confidence Lab™ Coaching
         ],
       },
       {
-        indexShort: "SRI",
-        title: "Selection Readiness",
+        {
+  indexShort: "ORI",
+  title: "Opportunity Readiness",
         blurb: "How likely they are to be chosen, invited, included — and how much they create social momentum.",
         questions: [
           "I get invited to group activities or hangouts.",
@@ -1135,11 +1138,11 @@ if (radarCanvas && typeof Chart !== "undefined") {
   window.radarChartInstance = new Chart(radarCanvas, {
     type: "radar",
     data: {
-     labels: [
+    labels: [
   "Entry Speed",
-  ["Friction", "Control"],
-  "Authority Signal",
-  ["Selection", "Readiness"]
+  ["Composure", "Under Pressure"],
+  ["Leadership", "Presence"],
+  ["Opportunity", "Readiness"]
 ],
       datasets: [{
         data: totalsRaw,
