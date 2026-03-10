@@ -528,6 +528,54 @@ html {
       This is not a personality label — it’s a <b>performance snapshot</b> you can train.
     </p>
 
+.founder-strip{
+  width:100%;
+  max-width:95%;
+  margin:0 auto 18px auto;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:12px;
+  padding:10px 14px;
+  box-sizing:border-box;
+  border:1px solid rgba(41,247,255,0.16);
+  border-radius:12px;
+  background:rgba(255,255,255,0.03);
+}
+
+.founder-avatar{
+  width:42px;
+  height:42px;
+  border-radius:50%;
+  object-fit:cover;
+  border:1px solid rgba(41,247,255,0.35);
+  flex-shrink:0;
+}
+
+.founder-copy{
+  line-height:1.25;
+}
+
+.founder-copy .top{
+  font-size:12px;
+  letter-spacing:1.5px;
+  text-transform:uppercase;
+  color:#8a8a8a;
+  font-weight:800;
+}
+
+.founder-copy .bottom{
+  font-size:14px;
+  color:var(--muted);
+  font-weight:700;
+}
+
+@media (max-width:560px){
+  .founder-strip{
+    justify-content:flex-start;
+  }
+}
+    
     <div class="card">
       <div class="kicker">How to Answer</div>
       <div class="headline">Answer based on real behavior — not best intentions.</div>
